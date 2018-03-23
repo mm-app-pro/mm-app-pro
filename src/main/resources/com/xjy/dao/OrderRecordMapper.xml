@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjy.dao.OrderRecordMapper">
+	<resultMap id="BaseResultMap" type="com.xjy.entity.OrderRecord">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="order_id" property="orderId" jdbcType="CHAR" />
+		<result column="identity_num" property="identityNum" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="mobile" property="mobile" jdbcType="VARCHAR" />
+		<result column="type" property="type" jdbcType="VARCHAR" />
+		<result column="area" property="area" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="detail" property="detail" jdbcType="VARCHAR" />
+		<result column="reserve_date_start" property="reserveDateStart"
+			jdbcType="TIMESTAMP" />
+		<result column="reserve_date_end" property="reserveDateEnd"
+			jdbcType="TIMESTAMP" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="job_num" property="jobNum" jdbcType="VARCHAR" />
+		<result column="job_name" property="jobName" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, order_id, identity_num, name, mobile, type, area, address, detail,
+		reserve_date_start,
+		reserve_date_end, status, job_num, job_name, remark, create_time, modify_time
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from order_record
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from order_record
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.xjy.entity.OrderRecord">
+		<selectKey resultType="java.lang.Integer" keyProperty="id"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into order_record (order_id, identity_num, name,
+		mobile, type, area,
+		address, detail, reserve_date_start,
+		reserve_date_end, status, job_num,
+		job_name, remark, create_time,
+		modify_time)
+		values (#{orderId,jdbcType=CHAR}, #{identityNum,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR},
+		#{mobile,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR},
+		#{address,jdbcType=VARCHAR}, #{detail,jdbcType=VARCHAR},
+		#{reserveDateStart,jdbcType=TIMESTAMP},
+		#{reserveDateEnd,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR},
+		#{jobNum,jdbcType=VARCHAR},
+		#{jobName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+		#{modifyTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.xjy.entity.OrderRecord">
+		<selectKey resultType="java.lang.Integer" keyProperty="id"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into order_record
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="orderId != null">
+				order_id,
+			</if>
+			<if test="identityNum != null">
+				identity_num,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="mobile != null">
+				mobile,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="area != null">
+				area,
+			</if>
+			<if test="address != null">
+				address,
+			</if>
+			<if test="detail != null">
+				detail,
+			</if>
+			<if test="reserveDateStart != null">
+				reserve_date_start,
+			</if>
+			<if test="reserveDateEnd != null">
+				reserve_date_end,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="jobNum != null">
+				job_num,
+			</if>
+			<if test="jobName != null">
+				job_name,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="modifyTime != null">
+				modify_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="orderId != null">
+				#{orderId,jdbcType=CHAR},
+			</if>
+			<if test="identityNum != null">
+				#{identityNum,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null">
+				#{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=VARCHAR},
+			</if>
+			<if test="area != null">
+				#{area,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="detail != null">
+				#{detail,jdbcType=VARCHAR},
+			</if>
+			<if test="reserveDateStart != null">
+				#{reserveDateStart,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reserveDateEnd != null">
+				#{reserveDateEnd,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=VARCHAR},
+			</if>
+			<if test="jobNum != null">
+				#{jobNum,jdbcType=VARCHAR},
+			</if>
+			<if test="jobName != null">
+				#{jobName,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyTime != null">
+				#{modifyTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.xjy.entity.OrderRecord">
+		update order_record
+		<set>
+			<if test="orderId != null">
+				order_id = #{orderId,jdbcType=CHAR},
+			</if>
+			<if test="identityNum != null">
+				identity_num = #{identityNum,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null">
+				mobile = #{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				type = #{type,jdbcType=VARCHAR},
+			</if>
+			<if test="area != null">
+				area = #{area,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				address = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="detail != null">
+				detail = #{detail,jdbcType=VARCHAR},
+			</if>
+			<if test="reserveDateStart != null">
+				reserve_date_start = #{reserveDateStart,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reserveDateEnd != null">
+				reserve_date_end = #{reserveDateEnd,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="jobNum != null">
+				job_num = #{jobNum,jdbcType=VARCHAR},
+			</if>
+			<if test="jobName != null">
+				job_name = #{jobName,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyTime != null">
+				modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.xjy.entity.OrderRecord">
+		update order_record
+		set order_id = #{orderId,jdbcType=CHAR},
+		identity_num = #{identityNum,jdbcType=VARCHAR},
+		name = #{name,jdbcType=VARCHAR},
+		mobile = #{mobile,jdbcType=VARCHAR},
+		type = #{type,jdbcType=VARCHAR},
+		area = #{area,jdbcType=VARCHAR},
+		address = #{address,jdbcType=VARCHAR},
+		detail = #{detail,jdbcType=VARCHAR},
+		reserve_date_start = #{reserveDateStart,jdbcType=TIMESTAMP},
+		reserve_date_end = #{reserveDateEnd,jdbcType=TIMESTAMP},
+		status = #{status,jdbcType=VARCHAR},
+		job_num = #{jobNum,jdbcType=VARCHAR},
+		job_name = #{jobName,jdbcType=VARCHAR},
+		remark = #{remark,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<!-- new -->
+	<select id="listByIdentityNum" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from order_record
+		where identity_num = #{identityNum}
+	</select>
+</mapper>
