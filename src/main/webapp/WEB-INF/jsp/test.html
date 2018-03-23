@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>水平居中测试</title>
+	<style>
+		.square{  
+		     width:0;  
+		     height:0;  
+		     margin:0 auto;  
+		     border:6px solid transparent;  
+		     border-top: 6px solid red;  
+		 } 
+		        .box{
+             position: absolute;
+             left: 0;
+             top: 0;
+             width: 0;
+             height:0;
+             border: 6px solid transparent;
+         }
+        .b1{
+            border-bottom-color:#000 ;
+        }
+        .b2{
+            border-bottom-color:#fff ;
+        }
+} 
+	</style>
+</head>
+<body>
+	<div class="box b1"></div>  
+<div class="box b2"></div>  
+</body>
+</html>
+<script>  
+    function  outer(){  
+        var num=0;//内部变量  
+       return  function add(){//通过return返回add函数，就可以在outer函数外访问了。
+            num++;//内部函数有引用，作为add函数的一部分了  
+           console.log(num);  
+        };  
+    }  
+    var func1=outer();//  
+    func1();//实际上是调用add函数， 输出1  
+    func1();//输出2  
+    func1();//输出3
+    var func2=outer();  
+    func2();// 输出1  
+    func2();// 输出2  
+</script> 
