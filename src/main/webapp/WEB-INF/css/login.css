@@ -1,0 +1,30 @@
+body {
+    background: url(../images/bg.jpg);
+    position: relative;
+}
+
+#loginForm {
+    width: 50%;
+    position: fixed;
+    background: rgba(245, 245, 245, 0.13);
+    border-radius: 6px;
+    left: 50%;
+    top: 50%;
+    margin-left: -25%;
+    margin-top: -20%;
+    padding: 38px 0;
+}
+
+.Hui-iconfont {
+    font-size: 24px;
+    color: #fff;
+}
+
+.select-box {
+    display: inline-block;
+    background: #fff;
+    border-radius: 5px;
+    font-size: 16px;
+    height: 41px;
+    padding: 8px;
+}

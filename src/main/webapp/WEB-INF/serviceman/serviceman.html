@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+
+    <!-- 公共样式 -->
+    <link href="../lib/h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css" />
+    <link href="../lib/h-ui/css/H-ui.reset.css" rel="stylesheet" type="text/css" />
+    <link href="../lib/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css" />
+
+    <!-- 业务样式 -->
+    <link href="../css/pc.css" rel="stylesheet">
+    <link href="../css/media-phone.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <header class="navbar-wrapper">
+        <div class="navbar navbar-black">
+            <div class="container cl">
+                <a class="logo navbar-logo f-l mr-10" href="javascript:;">欢迎您</a>
+                <span class="logo navbar-slogan f-r mr-10">10001 &middot; 维修员</span>
+            </div>
+        </div>
+    </header>
+    <div class="container serviceCon mt-50">
+        <div id="serviceTab" class="manageTab">
+            <div class="tabBar clearfix">
+                <span>待处理</span>
+                <span>已完成</span>
+            </div>
+            <!-- 待处理 -->
+            <div class="tabCon">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table class="table table-border table-border table-hover hidden-xs">
+                            <thead class="text-c hidden-xs">
+                                <tr>
+                                    <th>时间</th>
+                                    <th>工单详情</th>
+                                    <th>联系人</th>
+                                    <th>联系电话</th>
+                                    <th>地址</th>
+                                    <th>工单状态</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-c content">
+                                <tr>
+                                    <td>2017-12-06 13:14</td>
+                                    <td  class="td-detail"><span>宿舍冷水第二个水龙头漏水</span></td>
+                                    <td>李同学</td>
+                                    <td>18213169874</td>
+                                    <td>广州商学院3栋510</td>
+                                    <td class="c-warning td-manage bt-snatch">
+                                        <input class="btn btn-warning radius" type="button" value="抢">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="visible-xs phoneCeil">
+                            <ul class="content">
+                                <li class="cl pb-10">
+                                    <div class="cl">
+                                        <div class="col-xs-8">
+                                            <b>李同学</b>
+                                            <span class="pipe">|</span>
+                                            <b>18816451299</b>
+                                        </div>
+                                        <div class="col-xs-4 bt-snatch text-r">
+                                            <label class="c-999 f-12">2017-12-6&nbsp;13:14</label>
+                                        </div>
+                                    </div>
+                                    <div class="cl mt-10">
+                                        <div class="col-xs-9">
+                                            <p class="orderDetail">宿舍冷水水龙头第二个漏水宿舍冷水水龙头第二个漏水宿舍冷水水龙头第二个漏宿舍冷水水龙头第二个漏水水</p>
+                                        </div>
+                                        <div class="col-xs-3 bt-snatch text-r">
+                                            <input class="btn btn-warning radius" type="button" value="抢">
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 已完成 -->
+            <div class="tabCon">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table class="table table-border table-border table-hover hidden-xs" id="serviceCon">
+                            <thead class="text-c hidden-xs">
+                                <tr>
+                                    <th>时间</th>
+                                    <th>工单详情</th>
+                                    <th>联系人</th>
+                                    <th>联系电话</th>
+                                    <th>地址</th>
+                                    <th>反馈</th>
+                                    <th>工单状态</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-c content">
+                                <tr class="li-data">
+                                    <td>2017-12-06 13:14</td>
+                                    <td class="li-detail"><span>宿舍冷水第二个水龙头漏水宿舍冷水第二个水龙头漏水宿舍冷水第二个水龙头漏水宿舍冷水第二个水龙头漏水宿舍冷水第二个水龙头漏水</span></td>
+                                    <td class="li-name">李同学</td>
+                                    <td class="li-phone">18213169874</td>
+                                    <td class="li-address">广州商学院3栋510</td>
+                                    <td>顺利维修完成</td>
+                                    <td class="c-warning td-state">已完成</td>
+                                </tr>
+                                <tr class="li-data">
+                                    <td>2017-12-06 13:14</td>
+                                    <td class="li-detail"><span>宿舍冷水第二个水龙头漏水宿舍冷水第二个水龙头漏水宿舍冷水第二个水龙头漏水宿舍冷水第二个水龙头漏水宿舍冷水第二个水龙头漏水</span></td>
+                                    <td class="li-name">李同学</td>
+                                    <td class="li-phone">18213169874</td>
+                                    <td class="li-address">广州商学院3栋510</td>
+                                    <td></td>
+                                    <td class="c-warning td-state"><input class="btn btn-warning-outline radius size-S feedbackWait" type="button" value="待反馈"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="visible-xs phoneCeil finishOrder">
+                            <ul class="cl content">
+                                <li class="li-data pb-10 pt-10">
+                                    <div class="cl">
+                                        <div class="col-xs-8">
+                                            <b class="li-name">李同学</b>
+                                            <b class="ml-20 li-phone">18816451299</b>
+                                        </div>
+                                        <div class="col-xs-4 text-r">
+                                            <label class="c-999 f-12">2017-12-6&nbsp;13:14</label>
+                                        </div>
+                                    </div>
+                                    <div class="cl">
+                                        <div class="col-xs-8">
+                                            <p class="mt-5 li-detail orderDetail f-14">宿舍冷水水龙头第二个漏水宿舍冷水水龙头第二个漏水宿舍冷水水龙头第二个漏宿舍冷水水龙头第二个漏水水</p>
+                                            <p class="hidden li-address">123123</p>
+                                        </div>
+                                        <div class="col-xs-4 text-r c-warning">已完成</div>
+                                    </div>
+                                </li>
+                                <li class="li-data  pb-10 pt-10">
+                                    <div class="cl">
+                                        <div class="col-xs-8">
+                                            <b class="li-name">李同学</b>
+                                            <b class="ml-20 li-phone">18816451299</b>
+                                        </div>
+                                        <div class="col-xs-4 text-r">
+                                            <label class="c-999 f-12">2017-12-6&nbsp;13:14</label>
+                                        </div>
+                                    </div>
+                                    <div class="cl">
+                                        <div class="col-xs-8">
+                                            <p class="mt-5 li-detail orderDetail f-14">宿舍冷水水龙头第二个漏水宿舍冷水水龙头第二个漏水宿舍冷水水龙头第二个漏宿舍冷水水龙头第二个漏水水</p>
+                                            <p class="hidden li-address">123123</p>
+                                        </div>
+                                        <div class="col-xs-4 text-r mt-5 c-warning">
+                                            <input class="btn btn-warning-outline radius size-S feedbackWait" type="button" value="待反馈">
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 维修反馈弹窗 -->
+    <div id="feedbackModel" class="pl-20 pr-20" hidden>
+        <div class="mt-10 cl">
+            <strong class="col-xs-4">联系信息：</strong>
+            <p class="col-xs-8" id="fbContack"></p>
+        </div>
+        <div class="mt-10 cl">
+            <strong class="col-xs-4">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：</strong>
+            <p class="col-xs-8" id="fbAddress"></p>
+        </div>
+        <div class="mt-10 cl">
+            <strong class="col-xs-4">具体事项：</strong>
+            <p class="col-xs-8" id="fbDetail"></p>
+        </div>
+        <div class="mt-10 cl feedback">
+            <strong class="col-xs-4">维修反馈：</strong>
+            <p class="col-xs-8 pt-5 ">
+                <textarea class="textarea"  name="feedback" placeholder="请输入维修反馈.."></textarea>
+            </p>
+        </div>
+        <!-- <div class="mt-20 mb-20 text-c">
+            <input name="" id="commit" type="submit" class="btn btn-primary radius size-S mr-50" value="&nbsp;确&nbsp;&nbsp;&nbsp;&nbsp;定&nbsp;">
+            <input name="" type="button" class="btn btn-default radius size-S" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;">
+        </div> -->
+    </div>
+</body>
+
+</html>
+
+<!-- 业务脚本 -->
+<script src="../lib/jquery.min.js"></script>
+<script src="../lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script src="../lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script src="../lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script src="../lib/layer/2.4/layer.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/serviceman.js"></script>
