@@ -33,3 +33,40 @@ function sendRequest(url,data){
     })
     return obj
 }
+
+/**
+     * 分页
+     * Url 请求地址
+     * curr  当前页数
+     * nums  每页条数
+     * pageDivId 容器ID
+     * array 参数
+     * templateId 模板ID
+     */
+    function pagements(url,curr,nums,pageDivId,array,templateId){
+      array.strPageNo = curr || 1;
+      $.getJSON(url, array, function(res){
+         //没有数据提示
+        if(res!=null && res.data!=null && res.data.length==0){
+                document.getElementById('content').innerHTML ='暂时没有数据哦！';
+                return;
+        }
+        var  pages= Math.ceil(res.totalRows/nums);
+        // 数据渲染
+        var html = template(templateId,res);
+        document.getElementById('content').innerHTML = html;
+        //显示分页
+        laypage({
+          cont: pageDivId, //容器。值支持id名、原生dom对象，jquery对象。【如该容器为】：<div id="page1"></div>
+          pages: pages, //通过后台拿到的总页数
+          curr: curr || 1, //当前页
+          skip: true,
+          groups : 3,
+          jump: function(obj, first){ //触发分页后的回调
+            if(!first){ //点击跳页触发函数自身，并传递当前页：obj.curr
+                pagements(url,obj.curr,nums,pageDivId,array,templateId);
+            }
+          }
+        })
+      })
+    }

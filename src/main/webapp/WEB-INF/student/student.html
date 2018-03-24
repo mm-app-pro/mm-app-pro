@@ -51,38 +51,8 @@
                                     <th>工单状态</th>
                                 </tr>
                             </thead>
-                            <tbody class="text-c">
-                                <tr>
-                                    <td>2017-12-06 13:14</td>
-                                    <td>宿舍冷水第二个水龙头漏水</td>
-                                    <td class="td-klass">水工</td>
-                                    <td class="c-warning td-state">处理中</td>
-                                </tr>
-                                <tr>
-                                    <td>2017-12-06 13:14</td>
-                                    <td>宿舍冷水第二个水龙头漏水</td>
-                                    <td class="td-klass">水工</td>
-                                    <td class="c-warning td-state">处理完成</td>
-                                </tr>
-                                <tr>
-                                    <td>2017-12-06 13:14</td>
-                                    <td>宿舍冷水第二个水龙头漏水</td>
-                                    <td class="td-klass">水工</td>
-                                    <td class="c-warning td-state">处理完成</td>
-                                </tr>
-                                <tr>
-                                    <td>2017-12-06 13:14</td>
-                                    <td>宿舍冷水第二个水龙头漏水</td>
-                                    <td class="td-klass">水工</td>
-                                    <td class="c-warning td-state">处理完成</td>
-                                </tr>
-                                <tr>
-                                    <td>2017-12-06 13:14</td>
-                                    <td>宿舍冷水第二个水龙头漏水</td>
-                                    <td class="td-klass">水工</td>
-                                    <td class="c-warning td-state">处理完成</td>
-                                </tr>
-                            </tbody>
+                            <tbody class="text-c" id="content"></tbody>
+                            <div id="page"></div>
                         </table>
                     </div>
                 </div>
@@ -128,9 +98,15 @@
                                 <input type="hidden" name="reserveDateEnd" id="reserveDateEnd" value="">
                             </div>
                             <div class="row cl">
-                                <label class="form-label col-xs-3 col-sm-2 text-r">地点：</label>
+                                <label class="form-label col-xs-3 col-sm-2 text-r">地区:</label>
                                 <div class="formControls col-xs-9 col-sm-8">
-                                    <input id="" name="address" type="text" placeholder="请输入.." class="input-text size-L radius">
+                                    <input id="area" name="area" type="text" placeholder="如：1栋.." class="input-text size-L radius">
+                                </div>
+                            </div>
+                            <div class="row cl">
+                                <label class="form-label col-xs-3 col-sm-2 text-r">具体地址:</label>
+                                <div class="formControls col-xs-9 col-sm-8">
+                                    <input id="address" name="address" type="text" placeholder="请输入.." class="input-text size-L radius">
                                 </div>
                             </div>
                             <div class="row cl">
@@ -154,10 +130,32 @@
 
 </html>
 
+<script id="orderTp" type="text/html">
+    {{each}}
+        <tr>
+            <td>{{$value.createTime}}</td>
+            <td>{{$value.detail}}</td>
+            {{if $value.type=='water'}}
+            <td class="td-klass">水工</td>
+            {{else if $value.type=='electricity'}}
+            <td class="td-klass">电工</td>
+            {{else}}
+            <td class="td-klass">公寓管理</td>
+            {{/if}}                        
+            <td class="c-warning td-state">{{$value.statusStr}}</td>
+        </tr>
+    {{/each}}
+</script>
+
+
 <!-- 业务脚本 -->
 <script src="../lib/jquery.min.js"></script>
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+<script src="../lib/layer/2.4/layer.js"></script>
+<script src="../lib/laypage/1.2/laypage.js"></script>
+<script src="../lib/artTemplate.js"></script>
 <script src="../js/common.js"></script>
 <script src="../js/student.js"></script>
+
