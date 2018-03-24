@@ -9,13 +9,13 @@
     <title>登录</title>
 
     <!-- 公共样式 -->
-    <link href="./lib/h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-    <link href="./lib/h-ui/css/H-ui.reset.css" rel="stylesheet" type="text/css" />
-    <link href="./lib/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css" />
+    <link href="/lib/h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css" />
+    <link href="/lib/h-ui/css/H-ui.reset.css" rel="stylesheet" type="text/css" />
+    <link href="/lib/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css" />
 
     <!-- 业务样式 -->
-    <link href="./css/login.css" rel="stylesheet">
-    <link href="./css/media-phone.css" rel="stylesheet">
+    <link href="/css/login.css" rel="stylesheet">
+    <link href="/css/media-phone.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -30,13 +30,13 @@
 			<div class="row cl">
 				<label class="form-label col-xs-3 col-sm-3"><i class="Hui-iconfont">&#xe60d;</i></label>
 				<div class="formControls col-xs-8 col-sm-8">
-					<input id="" name="num" type="text" placeholder="账户" class="input-text size-L radius">
+					<input id="num" name="num" type="text" placeholder="账户" class="input-text size-L radius">
 				</div>
 			</div>
 			<div class="row cl">
 				<label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
 				<div class="formControls col-xs-8">
-					<input id="" name="password" type="password" placeholder="密码" class="input-text size-L radius">
+					<input id="password" name="password" type="password" placeholder="密码" class="input-text size-L radius">
 				</div>
 			</div>
             <div class="row cl">
@@ -62,8 +62,8 @@
 </html>
 
 <!-- 业务脚本 -->
-<script src="./lib/jquery.min.js"></script>
+<script src="/lib/jquery.min.js"></script>
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
-<script src="./js/login.js"></script>
+<script src="/js/login.js"></script>

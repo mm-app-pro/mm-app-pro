@@ -10,6 +10,7 @@ import com.xjy.dao.SysUserMapper;
 import com.xjy.entity.SysUser;
 import com.xjy.service.UserLoginService;
 import com.xjy.util.BusinessServiceException;
+import com.xjy.util.Md5Utils;
 
 @Service("userLoginService")
 public class UserLoginServiceImpl implements UserLoginService {
@@ -24,8 +25,10 @@ public class UserLoginServiceImpl implements UserLoginService {
         if (null == user) {
             throw new BusinessServiceException("无效参数");
         }
-        SysUser login = sysUserMapper.checkLogin(user.getNum(), user.getPassword(),
-                user.getRoleId());
+        user.setPassword(Md5Utils.encrypt(user.getPassword()));
+        logger.info("password:{}",user.getPassword());
+        SysUser login =
+                sysUserMapper.checkLogin(user.getNum(), user.getPassword(), user.getRoleId());
         if (null == login) {
             throw new BusinessServiceException("用户不存在或密码不正确");
         }

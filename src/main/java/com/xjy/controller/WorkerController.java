@@ -6,8 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.github.pagehelper.Page;
 import com.xjy.entity.OrderRecord;
@@ -25,7 +25,7 @@ public class WorkerController {
     private WorkerService workerService;
 
     @RequestMapping("isCheckedOrderPage")
-    public ModelAndView isCheckedOrderPage(@RequestBody PageBean page) {
+    public ModelAndView isCheckedOrderPage(PageBean page) {
         ModelAndView mv = new ModelAndView("");
         Page<OrderRecord> list =
                 workerService.listIsCheckedOrder(page.getPageNum(), page.getPageSize());
@@ -38,7 +38,7 @@ public class WorkerController {
     }
 
     @RequestMapping("getOrder")
-    public RespBody getOrder(HttpServletRequest req, @RequestBody OrderRecord record) {
+    public RespBody getOrder(HttpServletRequest req, OrderRecord record) {
         logger.info("Invoke getOrder start!");
         RespBody resp = new RespBody();
         SysUser user = (SysUser) req.getSession().getAttribute("user");
@@ -58,7 +58,7 @@ public class WorkerController {
     }
 
     @RequestMapping("getAllOrder")
-    public ModelAndView getAllOrder(HttpServletRequest req, @RequestBody PageBean page) {
+    public ModelAndView getAllOrder(HttpServletRequest req, PageBean page) {
         logger.info("Invoke getAllOrder start!");
         ModelAndView mv = new ModelAndView();
         SysUser user = (SysUser) req.getSession().getAttribute("user");
@@ -74,7 +74,8 @@ public class WorkerController {
     }
 
     @RequestMapping("finishOrder")
-    public RespBody finishOrder(@RequestBody OrderRecord record) {
+    @ResponseBody
+    public RespBody finishOrder(OrderRecord record) {
         logger.info("Invoke finish order start!");
         RespBody resp = new RespBody();
         try {

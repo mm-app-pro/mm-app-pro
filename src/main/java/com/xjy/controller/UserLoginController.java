@@ -44,11 +44,11 @@ public class UserLoginController {
     public RespBody userLogin(HttpServletRequest req, SysUser user) {
         logger.info("Invoke userLogin start!");
         RespBody resp = new RespBody();
-        // user.setRoleId(3);
         logger.info("data:{}", user);
         try {
             SysUser login = userLoginService.login(user);
             resp.setCode(0);
+            resp.setRoleId(login.getRoleId());
             resp.setMessage("登陆成功");
             req.getSession().setAttribute("user", login);
         } catch (BusinessServiceException e) {
