@@ -12,9 +12,9 @@
 		<result column="address" property="address" jdbcType="VARCHAR" />
 		<result column="detail" property="detail" jdbcType="VARCHAR" />
 		<result column="reserve_date_start" property="reserveDateStart"
-			jdbcType="TIMESTAMP" />
+			jdbcType="VARCHAR" />
 		<result column="reserve_date_end" property="reserveDateEnd"
-			jdbcType="TIMESTAMP" />
+			jdbcType="VARCHAR" />
 		<result column="status" property="status" jdbcType="VARCHAR" />
 		<result column="job_num" property="jobNum" jdbcType="VARCHAR" />
 		<result column="job_name" property="jobName" jdbcType="VARCHAR" />
@@ -23,11 +23,9 @@
 		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		id, order_id, identity_num, name, mobile, type, area,
-		address, detail,
+		id, order_id, identity_num, name, mobile, type, area, address, detail,
 		reserve_date_start,
-		reserve_date_end, status, job_num,
-		job_name, remark, create_time, modify_time
+		reserve_date_end, status, job_num, job_name, remark, create_time, modify_time
 	</sql>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
@@ -37,8 +35,7 @@
 		where id = #{id,jdbcType=INTEGER}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from
-		order_record
+		delete from order_record
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.xjy.entity.OrderRecord">
@@ -47,24 +44,19 @@
 			SELECT LAST_INSERT_ID()
 		</selectKey>
 		insert into order_record (order_id, identity_num, name,
-		mobile, type,
-		area,
+		mobile, type, area,
 		address, detail, reserve_date_start,
-		reserve_date_end, status,
-		job_num,
+		reserve_date_end, status, job_num,
 		job_name, remark, create_time,
 		modify_time)
-		values
-		(#{orderId,jdbcType=CHAR}, #{identityNum,jdbcType=VARCHAR},
+		values (#{orderId,jdbcType=CHAR}, #{identityNum,jdbcType=VARCHAR},
 		#{name,jdbcType=VARCHAR},
-		#{mobile,jdbcType=VARCHAR},
-		#{type,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR},
+		#{mobile,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR},
 		#{address,jdbcType=VARCHAR}, #{detail,jdbcType=VARCHAR},
-		#{reserveDateStart,jdbcType=TIMESTAMP},
-		#{reserveDateEnd,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR},
+		#{reserveDateStart,jdbcType=VARCHAR},
+		#{reserveDateEnd,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
 		#{jobNum,jdbcType=VARCHAR},
-		#{jobName,jdbcType=VARCHAR},
-		#{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+		#{jobName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
 		#{modifyTime,jdbcType=TIMESTAMP})
 	</insert>
 	<insert id="insertSelective" parameterType="com.xjy.entity.OrderRecord">
@@ -149,10 +141,10 @@
 				#{detail,jdbcType=VARCHAR},
 			</if>
 			<if test="reserveDateStart != null">
-				#{reserveDateStart,jdbcType=TIMESTAMP},
+				#{reserveDateStart,jdbcType=VARCHAR},
 			</if>
 			<if test="reserveDateEnd != null">
-				#{reserveDateEnd,jdbcType=TIMESTAMP},
+				#{reserveDateEnd,jdbcType=VARCHAR},
 			</if>
 			<if test="status != null">
 				#{status,jdbcType=VARCHAR},
@@ -202,11 +194,10 @@
 				detail = #{detail,jdbcType=VARCHAR},
 			</if>
 			<if test="reserveDateStart != null">
-				reserve_date_start =
-				#{reserveDateStart,jdbcType=TIMESTAMP},
+				reserve_date_start = #{reserveDateStart,jdbcType=VARCHAR},
 			</if>
 			<if test="reserveDateEnd != null">
-				reserve_date_end = #{reserveDateEnd,jdbcType=TIMESTAMP},
+				reserve_date_end = #{reserveDateEnd,jdbcType=VARCHAR},
 			</if>
 			<if test="status != null">
 				status = #{status,jdbcType=VARCHAR},
@@ -230,31 +221,23 @@
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.xjy.entity.OrderRecord">
-		update
-		order_record
+		update order_record
 		set order_id = #{orderId,jdbcType=CHAR},
-		identity_num =
-		#{identityNum,jdbcType=VARCHAR},
+		identity_num = #{identityNum,jdbcType=VARCHAR},
 		name = #{name,jdbcType=VARCHAR},
 		mobile = #{mobile,jdbcType=VARCHAR},
 		type = #{type,jdbcType=VARCHAR},
 		area = #{area,jdbcType=VARCHAR},
 		address = #{address,jdbcType=VARCHAR},
 		detail = #{detail,jdbcType=VARCHAR},
-		reserve_date_start =
-		#{reserveDateStart,jdbcType=TIMESTAMP},
-		reserve_date_end =
-		#{reserveDateEnd,jdbcType=TIMESTAMP},
-		status =
-		#{status,jdbcType=VARCHAR},
+		reserve_date_start = #{reserveDateStart,jdbcType=VARCHAR},
+		reserve_date_end = #{reserveDateEnd,jdbcType=VARCHAR},
+		status = #{status,jdbcType=VARCHAR},
 		job_num = #{jobNum,jdbcType=VARCHAR},
 		job_name = #{jobName,jdbcType=VARCHAR},
-		remark =
-		#{remark,jdbcType=VARCHAR},
-		create_time =
-		#{createTime,jdbcType=TIMESTAMP},
-		modify_time =
-		#{modifyTime,jdbcType=TIMESTAMP}
+		remark = #{remark,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		modify_time = #{modifyTime,jdbcType=TIMESTAMP}
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 
@@ -263,7 +246,7 @@
 		select
 		<include refid="Base_Column_List" />
 		from order_record
-		where identity_num = #{identityNum}
+		where identity_num = #{identityNum} order by id desc
 	</select>
 	<select id="listIsCheckedOrder" resultMap="BaseResultMap">
 		select
@@ -294,5 +277,4 @@
 		from order_record
 		where status = "WAITECHECK" order by id
 	</select>
-
 </mapper>

@@ -1,4 +1,10 @@
 $(function(){
+	
+	var obj = sendRequest('/apply/loginUser',null);
+	obj = JSON.parse(obj);
+	var userText = obj.num+' &middot;'+obj.name;
+	$('#userMsg').html(userText);
+    
     //初始化
     $.manageTab("#stuTab .tabBar span","#stuTab .tabCon","current","click","0");
 
@@ -50,8 +56,6 @@ $(function(){
             $('#reserveDateStart').val(time[0]);
             $('#reserveDateEnd').val(time[1]);
             var data = $('#orderForm').serialize();
-            console.log(data);
-//            data = "identityNum=123&type=water&address=2&detail=3&reserveDateStart=2018-03-03 10:11&reserveDateEnd=2018-03-13 10:11";
             $.ajax({
                 url:'/apply/submit',
                 type:"post",
@@ -63,6 +67,7 @@ $(function(){
                 		res = JSON.parse(res);
                     if(res.code==0){
                         layer.msg('提交成功！');
+                        location.reload();
                     }else{
                         layer.msg('提交失败！'+res.message);
                     }
