@@ -28,7 +28,7 @@
         <div class="navbar navbar-black">
             <div class="container cl">
                 <a class="logo navbar-logo f-l mr-10" href="javascript:;">欢迎您</a>
-                <span class="logo navbar-slogan f-r mr-10">201406114353 &middot; 李同学</span>
+                <span class="logo navbar-slogan f-r mr-10" id="userMsg"></span>
             </div>
         </div>
     </header>
@@ -52,10 +52,10 @@
                                 </tr>
                             </thead>
                             <tbody class="text-c" id="content"></tbody>
-                            <div id="page"></div>
                         </table>
                     </div>
                 </div>
+                <div id="page"></div>
             </div>
             <!-- 申报工单 -->
             <div class="tabCon">
@@ -87,10 +87,10 @@
                                     <span class="select-box  size-L radius">
                                         <select class="select" size="1" name="time" id="timeSelect">
                                             <option value="" selected>请选择..</option>
-                                            <option value="08：30-10：00">08：30-10：00</option>
-                                            <option value="10：00-12：00">10：00-12：00</option>
-                                            <option value="12：00-14：00">12：00-14：00</option>
-                                            <option value="14：30-17：00">14：30-17：00</option>
+                                            <option value="08：30-10：00">08:30-10:00</option>
+                                            <option value="10：00-12：00">10:00-12:00</option>
+                                            <option value="12：00-14：00">12:00-14:00</option>
+                                            <option value="14：30-17：00">14:30-17:00</option>
                                         </select>
                                     </span>
                                 </div>
@@ -133,7 +133,7 @@
 <script id="orderTp" type="text/html">
     {{each result}}
         <tr>
-            <td>{{$value.createTime}}</td>
+            <td>{{$value.createTimeStr}}</td>
             <td>{{$value.detail}}</td>
             {{if $value.type=='water'}}
             <td class="td-klass">水工</td>
@@ -155,7 +155,7 @@
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
 <script src="../lib/layer/2.4/layer.js"></script>
 <script src="../lib/laypage/1.2/laypage.js"></script>
-<script src="../lib/artTemplate.js"></script>
+<script src="../lib/template-web.js"></script>
 <script src="../js/common.js"></script>
 <script src="../js/student.js"></script>
 

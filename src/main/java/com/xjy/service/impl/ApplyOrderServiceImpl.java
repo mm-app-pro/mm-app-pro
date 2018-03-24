@@ -1,14 +1,13 @@
 package com.xjy.service.impl;
 
 import java.util.Date;
-import java.util.List;
-
 import javax.annotation.Resource;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.xjy.dao.OrderRecordMapper;
 import com.xjy.entity.OrderRecord;
 import com.xjy.enums.OrderStatusEnum;
@@ -40,12 +39,15 @@ public class ApplyOrderServiceImpl implements ApplyOrderService {
     }
 
     @Override
-    public List<OrderRecord> listByIdentityNum(String identityNum) {
+    public Page<OrderRecord> listByIdentityNum(String identityNum, Integer pageNum,
+            Integer pageSize) {
         logger.info("Invoke listByIdentityNum start!");
         if (StringUtils.isBlank(identityNum)) {
             return null;
         }
-        List<OrderRecord> list = orderRecordMapper.listByIdentityNum(identityNum);
+        Page<OrderRecord> list = PageHelper.startPage(pageNum, pageSize).doSelectPage(() -> {
+            orderRecordMapper.listByIdentityNum(identityNum);
+        });
         logger.info("Invoke listByIdentityNum end!");
         return list;
     }

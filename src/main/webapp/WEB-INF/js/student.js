@@ -1,4 +1,10 @@
 $(function(){
+	
+	var obj = sendRequest('/apply/loginUser',null);
+	obj = JSON.parse(obj);
+	var userText = obj.num+' &middot;'+obj.name;
+	$('#userMsg').html(userText);
+    
     //初始化
     $.manageTab("#stuTab .tabBar span","#stuTab .tabCon","current","click","0");
 
@@ -11,7 +17,7 @@ $(function(){
     var templateId="orderTp";
     
     //初始化列表页和分页
-    var arrays = {'PageNum':pageNum};
+    var arrays = {'pageNum':pageNum,'pageSize':pageSize};
     pagements(url,pageNum,pageSize,pageDivId,arrays,templateId);
 
 
@@ -50,7 +56,6 @@ $(function(){
             $('#reserveDateStart').val(time[0]);
             $('#reserveDateEnd').val(time[1]);
             var data = $('#orderForm').serialize();
-            console.log(data);
             $.ajax({
                 url:'/apply/submit',
                 type:"post",
@@ -59,8 +64,10 @@ $(function(){
                     layer.msg('系统繁忙，请稍后再试！');
                 },
                 success:function(res){
+                		res = JSON.parse(res);
                     if(res.code==0){
                         layer.msg('提交成功！');
+                        location.reload();
                     }else{
                         layer.msg('提交失败！'+res.message);
                     }

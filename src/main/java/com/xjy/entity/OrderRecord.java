@@ -25,9 +25,9 @@ public class OrderRecord implements Serializable {
 
     private String detail;
 
-    private Date reserveDateStart;
+    private String reserveDateStart;
 
-    private Date reserveDateEnd;
+    private String reserveDateEnd;
 
     private String status;
 
@@ -115,19 +115,19 @@ public class OrderRecord implements Serializable {
         this.detail = detail == null ? null : detail.trim();
     }
 
-    public Date getReserveDateStart() {
+    public String getReserveDateStart() {
         return reserveDateStart;
     }
 
-    public void setReserveDateStart(Date reserveDateStart) {
+    public void setReserveDateStart(String reserveDateStart) {
         this.reserveDateStart = reserveDateStart;
     }
 
-    public Date getReserveDateEnd() {
+    public String getReserveDateEnd() {
         return reserveDateEnd;
     }
 
-    public void setReserveDateEnd(Date reserveDateEnd) {
+    public void setReserveDateEnd(String reserveDateEnd) {
         this.reserveDateEnd = reserveDateEnd;
     }
 

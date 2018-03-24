@@ -20,15 +20,14 @@ function sendRequest(url,data){
     var obj = {};
     $.ajax({
         url:url,
-        async:false,
         type:'post',
         data:data,
-        error:function(res){
-            console.log('系统繁忙');
+        async:false,
+        error:function(){
+            layer.msg('系统繁忙，请稍后再试！');
         },
-        succcess:function(res){
-        	   console.log("common:",res);
-            obj = res
+        success:function(res){
+        		obj = res;
         }
     })
     return obj
@@ -51,8 +50,7 @@ function sendRequest(url,data){
                 document.getElementById('content').innerHTML ='暂时没有数据哦！';
                 return;
         }
-        console.log('--------->分页数据',res);
-        var  pages= Math.ceil(res.totalRows/pageSize);
+        var  pages= res.pages;
         // 数据渲染
         var html = template(templateId,res);
         document.getElementById('content').innerHTML = html;
