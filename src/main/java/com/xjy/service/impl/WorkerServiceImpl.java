@@ -45,8 +45,8 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     @Override
-    public Page<OrderRecord> listAllOrderByJobNum(Integer pageNum, Integer pageSize,
-            String jobNum, String status) {
+    public Page<OrderRecord> listAllOrderByJobNum(Integer pageNum, Integer pageSize, String jobNum,
+            String status) {
         logger.info("Invoke listAllOrderByJobNum start!");
         Page<OrderRecord> list = PageHelper.startPage(pageNum, pageSize).doSelectPage(() -> {
             orderRecordMapper.listAllOrderByJobNum(jobNum, status);
@@ -62,6 +62,14 @@ public class WorkerServiceImpl implements WorkerService {
         record.setStatus(OrderStatusEnum.FINISH.name());
         record.setModifyTime(new Date());
         return orderRecordMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public OrderRecord selectOrderRecordById(Integer id) {
+        logger.info("Invoke selectOrderRecordById start!");
+        OrderRecord record = orderRecordMapper.selectByPrimaryKey(id);
+        logger.info("Invoke selectOrderRecordById end!");
+        return record;
     }
 
 

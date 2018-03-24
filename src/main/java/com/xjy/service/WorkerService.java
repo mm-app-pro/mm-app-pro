@@ -14,4 +14,6 @@ public interface WorkerService {
             String status);
 
     int finishOrder(Integer orderId);
+
+    OrderRecord selectOrderRecordById(Integer id);
 }

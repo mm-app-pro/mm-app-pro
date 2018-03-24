@@ -90,12 +90,12 @@ public class WorkerController {
 
     @RequestMapping("getDetailById")
     @ResponseBody
-    public OrderRecord getDetailById() {
+    public OrderRecord getDetailById(OrderRecord record) {// 通过order id 获取工单记录详情
         logger.info("Invoke getDetailById start!");
-        OrderRecord record = logger.info("Invoke getDetailById end!");
-        return record;
+        OrderRecord result = workerService.selectOrderRecordById(record.getId());
+        logger.info("Invoke getDetailById end!");
+        return result;
     }
-
 
     @RequestMapping("getFinishOrder")
     @ResponseBody
@@ -116,12 +116,13 @@ public class WorkerController {
         return result;
     }
 
-    @RequestMapping("finishOrder") // 已完成
+    @RequestMapping("finishOrder")
     @ResponseBody
-    public RespBody finishOrder(OrderRecord record) {
+    public RespBody finishOrder(OrderRecord record) {// 更新为已完成状态
         logger.info("Invoke finish order start!");
         RespBody resp = new RespBody();
         try {
+            record.setStatus(OrderStatusEnum.FINISH.name());
             workerService.finishOrder(record.getId());
             resp.setCode(0);
             resp.setMessage("success!");
