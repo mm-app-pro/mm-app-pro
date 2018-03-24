@@ -1,8 +1,13 @@
 package com.xjy.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.java_websocket.WebSocket;
+import org.java_websocket.WebSocketServerFactory;
+import org.java_websocket.server.WebSocketServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -12,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.Page;
+import com.xjy.entity.OrderRecord;
 import com.xjy.entity.PageBean;
 import com.xjy.entity.SysUser;
 import com.xjy.service.SysUserManageService;
@@ -132,6 +138,47 @@ public class SysUserManageController {
         }
         logger.info("Invoke modifyStatus end!");
         return resp;
+    }
+
+    @RequestMapping("uncheckOrderPage")
+    public ModelAndView uncheckOrderPage(@RequestBody PageBean page) {
+        logger.info("Invoke uncheckOrderPage start!");
+        ModelAndView mv = new ModelAndView("");
+        Page<OrderRecord> list =
+                sysUserManageService.listUncheckOrder(page.getPageNum(), page.getPageSize());
+        mv.addObject("list", list.getResult());
+        mv.addObject("pageNum", list.getPageNum());
+        mv.addObject("pageSize", list.getPageSize());
+        mv.addObject("pages", list.getPages());
+        mv.addObject("total", list.getTotal());
+        logger.info("Invoke uncheckOrderPage end!");
+        return mv;
+    }
+
+    @RequestMapping("checkOrder")
+    @ResponseBody
+    public RespBody checkOrder(@RequestBody OrderRecord record) {
+        logger.info("Invoke checkOrder start!");
+        RespBody resp = new RespBody();
+        try {
+            sysUserManageService.checkOrder(record);
+            resp.setCode(0);
+            resp.setMessage("success!");
+        } catch (Exception ex) {
+            resp.setCode(1);
+            resp.setMessage("server error!");
+        }
+        logger.info("Invoke checkOrder end!");
+        return resp;
+    }
+
+    @RequestMapping("findWorker")
+    @ResponseBody
+    public List<SysUser> findWorkerByType(@RequestBody OrderRecord record) {
+        logger.info("Invoke findWorkerByType start!");
+        List<SysUser> list = sysUserManageService.listWorkerByType(record.getType());
+        logger.info("Invoke findWorkerByType end!");
+        return list;
     }
 
 }
