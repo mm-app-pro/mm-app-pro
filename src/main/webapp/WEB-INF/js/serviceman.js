@@ -3,6 +3,19 @@ $(function() {
     //显示工单详细内容
     $.manageTab("#serviceTab .tabBar span", "#serviceTab .tabCon", "current", "click", "0");
 
+    //获取工单列表数据
+    var data = {};
+    var pageSize = 10;
+    var pageNum = 1;
+    var url = '/worker/isCheckedOrder'
+    var pageDivId="page";
+    var templateId="serviceMsg";
+    
+    //初始化列表页和分页
+    var arrays = {'pageNum':pageNum,'pageSize':pageSize};
+    pagements(url,pageNum,pageSize,pageDivId,arrays,templateId);
+
+
     // 显示留言内容
     $('body').delegate('.content span', 'mouseover', function() {
         if ($(this).text().length <= 0) {

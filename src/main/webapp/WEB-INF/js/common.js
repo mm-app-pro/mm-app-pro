@@ -1,3 +1,9 @@
+   // 显示用户信息
+    var obj = sendRequest('/apply/loginUser',null);
+    obj = JSON.parse(obj);
+    var userText = obj.num+' &middot;'+obj.name;
+    $('#userMsg').html(userText);
+
 // 选项卡功能
 jQuery.manageTab = function(tabBar, tabCon, class_name, tabEvent, i) {
     var $tab_menu = $(tabBar);

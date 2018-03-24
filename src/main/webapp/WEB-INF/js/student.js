@@ -1,9 +1,4 @@
 $(function(){
-	
-	var obj = sendRequest('/apply/loginUser',null);
-	obj = JSON.parse(obj);
-	var userText = obj.num+' &middot;'+obj.name;
-	$('#userMsg').html(userText);
     
     //初始化
     $.manageTab("#stuTab .tabBar span","#stuTab .tabCon","current","click","0");

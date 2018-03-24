@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 
-<head>
+<head> 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,7 +28,7 @@
         <div class="navbar navbar-black">
             <div class="container cl">
                 <a class="logo navbar-logo f-l mr-10" href="javascript:;">欢迎您</a>
-                <span class="logo navbar-slogan f-r mr-10">10001 &middot; 维修员</span>
+                <span class="logo navbar-slogan f-r mr-10" id="userMsg"></span>
             </div>
         </div>
     </header>
@@ -41,57 +41,9 @@
             <!-- 待处理 -->
             <div class="tabCon">
                 <div class="panel panel-default">
-                    <div class="panel-body">
-                        <table class="table table-border table-border table-hover hidden-xs">
-                            <thead class="text-c hidden-xs">
-                                <tr>
-                                    <th>时间</th>
-                                    <th>工单详情</th>
-                                    <th>联系人</th>
-                                    <th>联系电话</th>
-                                    <th>地址</th>
-                                    <th>工单状态</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-c content">
-                                <tr>
-                                    <td>2017-12-06 13:14</td>
-                                    <td  class="td-detail"><span>宿舍冷水第二个水龙头漏水</span></td>
-                                    <td>李同学</td>
-                                    <td>18213169874</td>
-                                    <td>广州商学院3栋510</td>
-                                    <td class="c-warning td-manage bt-snatch">
-                                        <input class="btn btn-warning radius" type="button" value="抢">
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="visible-xs phoneCeil">
-                            <ul class="content">
-                                <li class="cl pb-10">
-                                    <div class="cl">
-                                        <div class="col-xs-8">
-                                            <b>李同学</b>
-                                            <span class="pipe">|</span>
-                                            <b>18816451299</b>
-                                        </div>
-                                        <div class="col-xs-4 bt-snatch text-r">
-                                            <label class="c-999 f-12">2017-12-6&nbsp;13:14</label>
-                                        </div>
-                                    </div>
-                                    <div class="cl mt-10">
-                                        <div class="col-xs-9">
-                                            <p class="orderDetail">宿舍冷水水龙头第二个漏水宿舍冷水水龙头第二个漏水宿舍冷水水龙头第二个漏宿舍冷水水龙头第二个漏水水</p>
-                                        </div>
-                                        <div class="col-xs-3 bt-snatch text-r">
-                                            <input class="btn btn-warning radius" type="button" value="抢">
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    <div class="panel-body"  id="content"></div>
                 </div>
+                <div id="page"></div>
             </div>
             <!-- 已完成 -->
             <div class="tabCon">
@@ -204,8 +156,64 @@
         </div> -->
     </div>
 </body>
-
 </html>
+
+<script type="text/html" id="serviceMsg">    
+    <table class="table table-border table-border table-hover hidden-xs">
+        <thead class="text-c hidden-xs">
+            <tr>
+                <th>工单编号</th>
+                <th>预约时间</th>
+                <th>工单详情</th>
+                <th>联系人</th>
+                <th>联系电话</th>
+                <th>上门地址</th>
+                <th>工单状态</th>
+            </tr>
+        </thead>
+        <tbody class="text-c content">                                
+            {{each result}}
+            <tr>
+                <td>{{$value.orderId}}</td>
+                <td>{{$value.reserveDateStart}}-{{$value.reserveDateEnd}}</td>
+                <td  class="td-detail"><span>{{$value.detail}}</span></td>
+                <td>{{$value.name}}</td>
+                <td>{{$value.mobile}}</td>
+                <td>{{$value.area}} {{$value.address}}</td>
+                <td class="c-warning td-manage bt-snatch">
+                    <input class="btn btn-warning radius" type="button" value="领">
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <div class="visible-xs phoneCeil">
+        <ul class="content">
+            {{each result}}
+            <li class="cl pb-10">
+                <div class="cl">
+                    <div class="col-xs-8">
+                        <b>{{$value.name}}</b>
+                        <span class="pipe">|</span>
+                        <b>{{$value.mobile}}</b>
+                    </div>
+                    <div class="col-xs-4 bt-snatch text-r">
+                        <label class="c-999 f-12">{{$value.reserveDateStart}}-{{$value.reserveDateEnd}}</label>
+                    </div>
+                </div>
+                <div class="cl mt-10">
+                    <div class="col-xs-9">
+                        <p class="orderDetail">{{$value.detail}}</p>
+                    </div>
+                    <div class="col-xs-3 bt-snatch text-r">
+                        <input class="btn btn-warning radius" type="button" value="抢">
+                    </div>
+                </div>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+</script>
 
 <!-- 业务脚本 -->
 <script src="../lib/jquery.min.js"></script>
@@ -213,5 +221,7 @@
 <script src="../lib/jquery.validation/1.14.0/validate-methods.js"></script>
 <script src="../lib/jquery.validation/1.14.0/messages_zh.js"></script>
 <script src="../lib/layer/2.4/layer.js"></script>
+<script src="../lib/laypage/1.2/laypage.js"></script>
+<script src="../lib/template-web.js"></script>
 <script src="../js/common.js"></script>
 <script src="../js/serviceman.js"></script>
