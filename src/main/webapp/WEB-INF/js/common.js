@@ -27,6 +27,7 @@ function sendRequest(url,data){
             console.log('系统繁忙');
         },
         succcess:function(res){
+        	   console.log("common:",res);
             obj = res
         }
     })

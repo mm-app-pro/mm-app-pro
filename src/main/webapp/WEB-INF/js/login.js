@@ -20,13 +20,20 @@ $(function(){
 		success:"valid",
 		submitHandler:function(form){
             var data = $('#loginForm').serialize();
+            console.log(data);
             // 登录请求
-            var res = sendRequest('/login/user',data);
-            if(res.code==0){
-                layer.msg('登录成功！');
-            }else{
-                layer.msg('登录失败！');
-            }
+            $.ajax({
+            		url:"/login/user",
+            		data:data,
+            		type:"post",
+            		cache:false,
+            		error:function(){
+            			console.log('xxitongfanma')
+            		},
+            		success:function(res){
+            			console.log(res)
+            		}
+            })
         }
 	});
 })
