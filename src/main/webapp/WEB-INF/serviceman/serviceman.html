@@ -173,7 +173,7 @@
         </thead>
         <tbody class="text-c content">                                
             {{each result}}
-            <tr>
+            <tr id="{{$value.id}}" class="list-id">
                 <td>{{$value.orderId}}</td>
                 <td>{{$value.reserveDateStart}}-{{$value.reserveDateEnd}}</td>
                 <td  class="td-detail"><span>{{$value.detail}}</span></td>
@@ -181,7 +181,7 @@
                 <td>{{$value.mobile}}</td>
                 <td>{{$value.area}} {{$value.address}}</td>
                 <td class="c-warning td-manage bt-snatch">
-                    <input class="btn btn-warning radius" type="button" value="领">
+                    <input class="btn btn-warning radius getOrder" type="button" value="领">
                 </td>
             </tr>
             {{/each}}
@@ -190,7 +190,7 @@
     <div class="visible-xs phoneCeil">
         <ul class="content">
             {{each result}}
-            <li class="cl pb-10">
+            <li class="cl pb-10 list-id" id="{{$value.id}}">
                 <div class="cl">
                     <div class="col-xs-8">
                         <b>{{$value.name}}</b>
@@ -206,7 +206,7 @@
                         <p class="orderDetail">{{$value.detail}}</p>
                     </div>
                     <div class="col-xs-3 bt-snatch text-r">
-                        <input class="btn btn-warning radius" type="button" value="抢">
+                        <input class="btn btn-warning radius getOrder" type="button" value="抢">
                     </div>
                 </div>
             </li>
