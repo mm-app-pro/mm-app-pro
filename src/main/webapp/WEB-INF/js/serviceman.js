@@ -1,19 +1,35 @@
 $(function() {
     var index;
     //显示工单详细内容
-    $.manageTab("#serviceTab .tabBar span", "#serviceTab .tabCon", "current", "click", "0");
+    // $.manageTab("#serviceTab .tabBar span", "#serviceTab .tabCon", "current", "click", "0");
 
     //获取工单列表数据
     var data = {};
     var pageSize = 10;
     var pageNum = 1;
-    var url = '/worker/isCheckedOrder'
+    var url = '/worker/isCheckedOrder';
     var pageDivId="page";
     var templateId="serviceMsg";
     
     //初始化列表页和分页
     var arrays = {'pageNum':pageNum,'pageSize':pageSize};
     pagements(url,pageNum,pageSize,pageDivId,arrays,templateId);
+
+    // 根据不同选项显示列表
+    $('.tabBar span').click(function(){
+        var tag = $(this).attr('tag');
+        if(tag==0){
+            url = '/worker/isCheckedOrder';
+            pagements(url,pageNum,pageSize,pageDivId,arrays,templateId);
+        }else if(tag==1){
+            url = '/worker/getValidOrder';
+            pagements(url,pageNum,pageSize,pageDivId,arrays,templateId);
+        }else if(tag==2){
+            url = '/worker/getFinishOrder';
+            pagements(url,pageNum,pageSize,pageDivId,arrays,templateId);
+        }
+    })
+
 
     // 领取工单
     $('#content').delegate('.getOrder','click',function(){
