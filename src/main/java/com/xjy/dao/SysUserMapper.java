@@ -27,4 +27,6 @@ public interface SysUserMapper {
 
     SysUser checkLogin(@Param("num") String num, @Param("psw") String password,
             @Param("roleId") Integer roleId);
+    
+    List<SysUser> listWorkerByType(@Param("type") String type);
 }

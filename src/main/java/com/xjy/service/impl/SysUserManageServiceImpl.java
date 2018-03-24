@@ -1,5 +1,7 @@
 package com.xjy.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
@@ -8,7 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.xjy.dao.OrderRecordMapper;
 import com.xjy.dao.SysUserMapper;
+import com.xjy.entity.OrderRecord;
 import com.xjy.entity.SysUser;
 import com.xjy.service.SysUserManageService;
 import com.xjy.util.BusinessServiceException;
@@ -19,6 +23,9 @@ public class SysUserManageServiceImpl implements SysUserManageService {
 
     @Resource
     private SysUserMapper sysUserMapper;
+
+    @Resource
+    private OrderRecordMapper orderRecordMapper;
 
     @Override
     public void addSysUser(SysUser user) throws BusinessServiceException {
@@ -72,6 +79,29 @@ public class SysUserManageServiceImpl implements SysUserManageService {
         sysUserMapper.updateByPrimaryKeySelective(user);
         logger.info("Invoke modifyStatus end!");
 
+    }
+
+    @Override
+    public Page<OrderRecord> listUncheckOrder(Integer pageNum, Integer pageSize) {
+        logger.info("Invoke listUncheckOrder start!");
+        Page<OrderRecord> list = PageHelper.startPage(pageNum, pageSize).doSelectPage(() -> {
+            orderRecordMapper.listUncheckOrder();
+        });
+        logger.info("Invoke listUncheckOrder end!");
+        return list;
+    }
+
+    @Override
+    public List<SysUser> listWorkerByType(String type) {
+        logger.info("Invoke listWorkerByType start!");
+        List<SysUser> list = sysUserMapper.listWorkerByType(type);
+        logger.info("Invoke listWorkerByType end!");
+        return list;
+    }
+
+    @Override
+    public int checkOrder(OrderRecord record) {
+        return orderRecordMapper.updateByPrimaryKey(record);
     }
 
 }

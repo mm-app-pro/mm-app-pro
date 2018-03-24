@@ -178,4 +178,14 @@
 			role_id = #{roleId}
 		</where>
 	</select>
+	<select id="listWorkerByType" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sys_user
+		<where>
+			status = 'ON' and
+			type = #{type}
+		</where>
+	</select>
+	
 </mapper>

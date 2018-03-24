@@ -22,4 +22,13 @@ public interface OrderRecordMapper {
     int updateByPrimaryKey(OrderRecord record);
 
     List<OrderRecord> listByIdentityNum(@Param("identityNum") String identityNum);
+
+    List<OrderRecord> listIsCheckedOrder();
+
+    void getOrderByOrderId(@Param("orderId") Integer orderId, @Param("jobNum") String jobNum,
+            @Param("jobName") String jobName);
+    
+    List<OrderRecord> listAllOrderByJobNum(@Param("jobNum") String jobNum);
+    
+    List<OrderRecord> listUncheckOrder();
 }
