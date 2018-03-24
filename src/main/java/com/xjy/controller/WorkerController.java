@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,6 +17,7 @@ import com.xjy.entity.SysUser;
 import com.xjy.service.WorkerService;
 import com.xjy.util.BusinessServiceException;
 import com.xjy.util.RespBody;
+import com.xjy.util.RespList;
 
 @Controller
 @RequestMapping("worker")
@@ -24,17 +26,28 @@ public class WorkerController {
     @Resource
     private WorkerService workerService;
 
-    @RequestMapping("isCheckedOrderPage")
+    @RequestMapping("html")
     public ModelAndView isCheckedOrderPage(PageBean page) {
-        ModelAndView mv = new ModelAndView("");
+        ModelAndView mv = new ModelAndView("serviceman/serviceman");
+        return mv;
+    }
+
+    @RequestMapping("isCheckedOrder")
+    @ResponseBody
+    public RespList<OrderRecord> isCheckedOrder(HttpServletRequest req, PageBean page) {
+        logger.info("Invoke isCheckedOrder start!");
         Page<OrderRecord> list =
                 workerService.listIsCheckedOrder(page.getPageNum(), page.getPageSize());
-        mv.addObject("list", list.getResult());
-        mv.addObject("pageNum", list.getPageNum());
-        mv.addObject("pageSize", list.getPageSize());
-        mv.addObject("pages", list.getPages());
-        mv.addObject("total", list.getTotal());
-        return mv;
+        RespList<OrderRecord> result = new RespList<>();
+        result.setEndRow(list.getEndRow());
+        result.setPageNum(list.getPageNum());
+        result.setPages(list.getPages());
+        result.setPageSize(list.getPageSize());
+        result.setResult(list.getResult());
+        result.setStartRow(list.getStartRow());
+        result.setTotal(list.getTotal());
+        logger.info("Invoke isCheckedOrder end!");
+        return result;
     }
 
     @RequestMapping("getOrder")
