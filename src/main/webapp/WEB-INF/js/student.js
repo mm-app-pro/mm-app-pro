@@ -4,15 +4,15 @@ $(function(){
 
     //获取工单列表数据
     var data = {};
-    var nums = 10;
-    var pageNo = 1;
+    var pageSize = 10;
+    var pageNum = 1;
     var url = '/apply/list'
     var pageDivId="page";
     var templateId="orderTp";
     
     //初始化列表页和分页
-    var arrays = {'PageNo':pageNo};
-    pagements(url,pageNo,nums,pageDivId,arrays,templateId);
+    var arrays = {'PageNum':pageNum};
+    pagements(url,pageNum,pageSize,pageDivId,arrays,templateId);
 
 
     // 工单提交验证
