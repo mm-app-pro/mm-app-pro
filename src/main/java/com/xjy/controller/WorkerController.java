@@ -122,11 +122,12 @@ public class WorkerController {
         logger.info("Invoke finish order start!");
         RespBody resp = new RespBody();
         try {
-            record.setStatus(OrderStatusEnum.FINISH.name());
+            logger.info("reocrd:{}", record);
             workerService.finishOrder(record.getId());
             resp.setCode(0);
             resp.setMessage("success!");
         } catch (Exception ex) {
+            logger.error("finish order error! e:{}", ex.getMessage());
             resp.setCode(1);
             resp.setMessage("server error!");
         }

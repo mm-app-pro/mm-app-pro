@@ -66,6 +66,7 @@ $(function() {
     $('body').delegate('.feedbackWait', 'click', function() {
         var id = $(this).parents('.list-id').attr('id');
         var res = sendRequest('/worker/getDetailById',{"id":id});
+        res = JSON.parse(res);
         $('#fbContack').text(res.mobile);
         $('#fbAddress').text(res.area+''+res.address);
         $('#fbDetail').text(res.detail);
@@ -81,15 +82,19 @@ $(function() {
             btnAlign: 'c',
             yes: function(index, layero) {
                var remark = $('#setfeedbak').val();
-               var res = sendRequest('/worker/getDetailById',{"id":id,"remark":remark});
-               if(!remark && res.code==0){
-                 layer.msg('反馈完毕！');
-                 layer.close(index);
+               if(!remark){layer.msg('请输入反馈的内容!');return}
+               var res = sendRequest('/worker/finishOrder',{"id":id,"remark":remark});
+               res = JSON.parse(res);
+               if(res.code==0){
+                 layer.msg('反馈完毕！',{time:1500});
+            
+                 setTimeout(function(){location.reload()},1500)
+               }else{
+            	   	layer.msg('反馈失败，请稍后再试！');
+            	   	layer.close(index);
                }
             },
             btn2: function(index, layero) {
-                //按钮【按钮二】的回调
-                layer.msg('反馈失败，请稍后再试！');
                 layer.close(index);
             }
         })

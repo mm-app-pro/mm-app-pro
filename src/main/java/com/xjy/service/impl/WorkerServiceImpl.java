@@ -61,7 +61,7 @@ public class WorkerServiceImpl implements WorkerService {
         record.setId(orderId);
         record.setStatus(OrderStatusEnum.FINISH.name());
         record.setModifyTime(new Date());
-        return orderRecordMapper.updateByPrimaryKey(record);
+        return orderRecordMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
