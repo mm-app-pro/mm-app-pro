@@ -15,6 +15,24 @@ $(function() {
     var arrays = {'pageNum':pageNum,'pageSize':pageSize};
     pagements(url,pageNum,pageSize,pageDivId,arrays,templateId);
 
+    // 领取工单
+    $('#content').delegate('.getOrder','click',function(){
+        var id = $(this).parents('.list-id').attr('id');
+        var res = sendRequest('/worker/getOrder',{"id":id});
+        console.log(res);
+        if(res.code==0){
+            layer.msg('领取成功！',{time:1000});
+            setTimeout(function(){
+                location.reload();
+            })
+        }else{
+            layer.msg('领取失败！',{time:1000});
+            setTimeout(function(){
+                location.reload();
+            })
+        }
+    })
+
 
     // 显示留言内容
     $('body').delegate('.content span', 'mouseover', function() {
