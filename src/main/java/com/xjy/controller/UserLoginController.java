@@ -32,9 +32,7 @@ public class UserLoginController {
     @RequestMapping("page")
     public ModelAndView userLoginView() {
         logger.info("Invoke userLoginView start!");
-        ModelAndView mv = new ModelAndView();
-        List<SysRole> roleList = sysRoleService.listSysRole();
-        mv.addObject("roleList", roleList);
+        ModelAndView mv = new ModelAndView("login");
         logger.info("Invoke userLoginView end!");
         return mv;
     }
