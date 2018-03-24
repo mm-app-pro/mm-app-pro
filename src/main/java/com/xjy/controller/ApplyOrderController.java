@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.github.pagehelper.Page;
 import com.xjy.entity.OrderRecord;
+import com.xjy.entity.PageBean;
 import com.xjy.entity.SysUser;
 import com.xjy.enums.OrderStatusEnum;
 import com.xjy.service.ApplyOrderService;
@@ -70,12 +73,21 @@ public class ApplyOrderController {
 
     @RequestMapping("list")
     @ResponseBody
-    public List<OrderRecord> listRecordByIndetityNum(HttpServletRequest req) {
+    public RespList<OrderRecord> listRecordByIndetityNum(HttpServletRequest req, PageBean page) {
         SysUser su = (SysUser) req.getSession().getAttribute("user");
         String identityNum = su.getNum();
         logger.info("Invoke list start! data:{}", identityNum);
-        List<OrderRecord> list = applyOrderService.listByIdentityNum(identityNum);
-        logger.info("Invoke list end! list:{}", list);
-        return list;
+        Page<OrderRecord> list = applyOrderService.listByIdentityNum(identityNum, page.getPageNum(),
+                page.getPageSize());
+        RespList<OrderRecord> result = new RespList<>();
+        result.setEndRow(list.getEndRow());
+        result.setPageNum(list.getPageNum());
+        result.setPages(list.getPages());
+        result.setPageSize(list.getPageSize());
+        result.setResult(list.getResult());
+        result.setStartRow(list.getStartRow());
+        result.setTotal(list.getTotal());
+        logger.info("Invoke list end! list:{}", result);
+        return result;
     }
 }

@@ -52,9 +52,10 @@ function sendRequest(url,data){
                 return;
         }
         console.log('--------->分页数据',res);
-        var  pages= Math.ceil(res.totalRows/pageSize);
+        var  pages= res.pages;
         // 数据渲染
         var html = template(templateId,res);
+        console.log('---->',html)
         document.getElementById('content').innerHTML = html;
         //显示分页
         laypage({

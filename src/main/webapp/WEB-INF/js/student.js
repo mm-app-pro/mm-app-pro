@@ -11,7 +11,7 @@ $(function(){
     var templateId="orderTp";
     
     //初始化列表页和分页
-    var arrays = {'PageNum':pageNum};
+    var arrays = {'pageNum':pageNum,'pageSize':pageSize};
     pagements(url,pageNum,pageSize,pageDivId,arrays,templateId);
 
 
@@ -51,6 +51,7 @@ $(function(){
             $('#reserveDateEnd').val(time[1]);
             var data = $('#orderForm').serialize();
             console.log(data);
+//            data = "identityNum=123&type=water&address=2&detail=3&reserveDateStart=2018-03-03 10:11&reserveDateEnd=2018-03-13 10:11";
             $.ajax({
                 url:'/apply/submit',
                 type:"post",
@@ -59,6 +60,7 @@ $(function(){
                     layer.msg('系统繁忙，请稍后再试！');
                 },
                 success:function(res){
+                		res = JSON.parse(res);
                     if(res.code==0){
                         layer.msg('提交成功！');
                     }else{
