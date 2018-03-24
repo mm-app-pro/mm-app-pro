@@ -2,11 +2,9 @@ package com.xjy.controller;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -51,7 +49,7 @@ public class WorkerController {
     }
 
     @RequestMapping("getOrder")
-    public RespBody getOrder(HttpServletRequest req, OrderRecord record) {
+    public RespBody getOrder(HttpServletRequest req, OrderRecord record) {// 抢单
         logger.info("Invoke getOrder start!");
         RespBody resp = new RespBody();
         SysUser user = (SysUser) req.getSession().getAttribute("user");
@@ -71,7 +69,7 @@ public class WorkerController {
     }
 
     @RequestMapping("getAllOrder")
-    public ModelAndView getAllOrder(HttpServletRequest req, PageBean page) {
+    public ModelAndView getAllOrder(HttpServletRequest req, PageBean page) {// 获取自己的订单
         logger.info("Invoke getAllOrder start!");
         ModelAndView mv = new ModelAndView();
         SysUser user = (SysUser) req.getSession().getAttribute("user");
@@ -86,7 +84,7 @@ public class WorkerController {
         return mv;
     }
 
-    @RequestMapping("finishOrder")
+    @RequestMapping("finishOrder") // 已完成
     @ResponseBody
     public RespBody finishOrder(OrderRecord record) {
         logger.info("Invoke finish order start!");
