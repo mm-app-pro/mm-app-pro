@@ -35,8 +35,9 @@
     <div class="container serviceCon mt-50">
         <div id="serviceTab" class="manageTab">
             <div class="tabBar clearfix">
-                <span>待处理</span>
-                <span>已完成</span>
+                <span tag="0">待处理</span>
+                <span tag="1">处理中</span>
+                <span tag="2">已完成</span>
             </div>
             <!-- 待处理 -->
             <div class="tabCon">
@@ -46,7 +47,7 @@
                 <div id="page"></div>
             </div>
             <!-- 已完成 -->
-            <div class="tabCon">
+        <!--     <div class="tabCon">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <table class="table table-border table-border table-hover hidden-xs" id="serviceCon">
@@ -126,7 +127,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 
@@ -180,9 +181,17 @@
                 <td>{{$value.name}}</td>
                 <td>{{$value.mobile}}</td>
                 <td>{{$value.area}} {{$value.address}}</td>
+                {{if $value.status=='ISCHECK'}}
                 <td class="c-warning td-manage bt-snatch">
                     <input class="btn btn-warning radius getOrder" type="button" value="领">
                 </td>
+                {{else if $value.status=='VALID'}}
+                <td class="c-warning td-state">
+                    <input class="btn btn-warning-outline radius size-S feedbackWait" type="button" value="待反馈">
+                </td>
+                {{else if $value.status=='FINISH'}}
+                <div class="col-xs-4 text-r c-warning">已完成</div>
+                {{/if}}
             </tr>
             {{/each}}
         </tbody>
@@ -205,9 +214,18 @@
                     <div class="col-xs-9">
                         <p class="orderDetail">{{$value.detail}}</p>
                     </div>
+
+                    {{if $value.status=='ISCHECK'}}
                     <div class="col-xs-3 bt-snatch text-r">
-                        <input class="btn btn-warning radius getOrder" type="button" value="抢">
+                        <input class="btn btn-warning radius getOrder" type="button" value="领">
                     </div>
+                    {{else if $value.status=='VALID'}}
+                    <div class="col-xs-4 text-r mt-5 c-warning">
+                        <input class="btn btn-warning-outline radius size-S feedbackWait" type="button" value="待反馈">
+                    </div>
+                    {{else if $value.status=='FINISH'}}
+                    <td class="c-warning td-state">已完成</td>
+                    {{/if}}
                 </div>
             </li>
             {{/each}}
