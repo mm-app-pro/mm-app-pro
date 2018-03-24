@@ -20,7 +20,6 @@ $(function(){
 		success:"valid",
 		submitHandler:function(form){
             var data = $('#loginForm').serialize();
-            console.log(data);
             // 登录请求
             $.ajax({
             		url:"/login/user",
@@ -28,7 +27,7 @@ $(function(){
             		type:"post",
             		cache:false,
             		error:function(){
-            			console.log('xxitongfanma')
+            			console.log('登录失败，请稍后再试')
             		},
             		success:function(res){
             			console.log(res)
