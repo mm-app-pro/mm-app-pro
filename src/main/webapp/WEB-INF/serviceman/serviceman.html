@@ -33,101 +33,18 @@
         </div>
     </header>
     <div class="container serviceCon mt-50">
-        <div id="serviceTab" class="manageTab">
+        <div id="serviceTab">
             <div class="tabBar clearfix">
                 <span tag="0">待处理</span>
                 <span tag="1">处理中</span>
                 <span tag="2">已完成</span>
             </div>
             <!-- 待处理 -->
-            <div class="tabCon">
+           
                 <div class="panel panel-default">
                     <div class="panel-body"  id="content"></div>
                 </div>
                 <div id="page"></div>
-            </div>
-            <!-- 已完成 -->
-        <!--     <div class="tabCon">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <table class="table table-border table-border table-hover hidden-xs" id="serviceCon">
-                            <thead class="text-c hidden-xs">
-                                <tr>
-                                    <th>时间</th>
-                                    <th>工单详情</th>
-                                    <th>联系人</th>
-                                    <th>联系电话</th>
-                                    <th>地址</th>
-                                    <th>反馈</th>
-                                    <th>工单状态</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-c content">
-                                <tr class="li-data">
-                                    <td>2017-12-06 13:14</td>
-                                    <td class="li-detail"><span>宿舍冷水第二个水龙头漏水宿舍冷水第二个水龙头漏水宿舍冷水第二个水龙头漏水宿舍冷水第二个水龙头漏水宿舍冷水第二个水龙头漏水</span></td>
-                                    <td class="li-name">李同学</td>
-                                    <td class="li-phone">18213169874</td>
-                                    <td class="li-address">广州商学院3栋510</td>
-                                    <td>顺利维修完成</td>
-                                    <td class="c-warning td-state">已完成</td>
-                                </tr>
-                                <tr class="li-data">
-                                    <td>2017-12-06 13:14</td>
-                                    <td class="li-detail"><span>宿舍冷水第二个水龙头漏水宿舍冷水第二个水龙头漏水宿舍冷水第二个水龙头漏水宿舍冷水第二个水龙头漏水宿舍冷水第二个水龙头漏水</span></td>
-                                    <td class="li-name">李同学</td>
-                                    <td class="li-phone">18213169874</td>
-                                    <td class="li-address">广州商学院3栋510</td>
-                                    <td></td>
-                                    <td class="c-warning td-state"><input class="btn btn-warning-outline radius size-S feedbackWait" type="button" value="待反馈"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="visible-xs phoneCeil finishOrder">
-                            <ul class="cl content">
-                                <li class="li-data pb-10 pt-10">
-                                    <div class="cl">
-                                        <div class="col-xs-8">
-                                            <b class="li-name">李同学</b>
-                                            <b class="ml-20 li-phone">18816451299</b>
-                                        </div>
-                                        <div class="col-xs-4 text-r">
-                                            <label class="c-999 f-12">2017-12-6&nbsp;13:14</label>
-                                        </div>
-                                    </div>
-                                    <div class="cl">
-                                        <div class="col-xs-8">
-                                            <p class="mt-5 li-detail orderDetail f-14">宿舍冷水水龙头第二个漏水宿舍冷水水龙头第二个漏水宿舍冷水水龙头第二个漏宿舍冷水水龙头第二个漏水水</p>
-                                            <p class="hidden li-address">123123</p>
-                                        </div>
-                                        <div class="col-xs-4 text-r c-warning">已完成</div>
-                                    </div>
-                                </li>
-                                <li class="li-data  pb-10 pt-10">
-                                    <div class="cl">
-                                        <div class="col-xs-8">
-                                            <b class="li-name">李同学</b>
-                                            <b class="ml-20 li-phone">18816451299</b>
-                                        </div>
-                                        <div class="col-xs-4 text-r">
-                                            <label class="c-999 f-12">2017-12-6&nbsp;13:14</label>
-                                        </div>
-                                    </div>
-                                    <div class="cl">
-                                        <div class="col-xs-8">
-                                            <p class="mt-5 li-detail orderDetail f-14">宿舍冷水水龙头第二个漏水宿舍冷水水龙头第二个漏水宿舍冷水水龙头第二个漏宿舍冷水水龙头第二个漏水水</p>
-                                            <p class="hidden li-address">123123</p>
-                                        </div>
-                                        <div class="col-xs-4 text-r mt-5 c-warning">
-                                            <input class="btn btn-warning-outline radius size-S feedbackWait" type="button" value="待反馈">
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
         </div>
     </div>
 
@@ -190,7 +107,7 @@
                     <input class="btn btn-warning-outline radius size-S feedbackWait" type="button" value="待反馈">
                 </td>
                 {{else if $value.status=='FINISH'}}
-                <div class="col-xs-4 text-r c-warning">已完成</div>
+                <td class="col-xs-4 text-r c-warning">已完成</td>
                 {{/if}}
             </tr>
             {{/each}}
@@ -224,7 +141,7 @@
                         <input class="btn btn-warning-outline radius size-S feedbackWait" type="button" value="待反馈">
                     </div>
                     {{else if $value.status=='FINISH'}}
-                    <td class="c-warning td-state">已完成</td>
+                    <div class="c-warning td-state">已完成</div>
                     {{/if}}
                 </div>
             </li>

@@ -7,10 +7,11 @@ import com.xjy.util.BusinessServiceException;
 public interface WorkerService {
     Page<OrderRecord> listIsCheckedOrder(Integer pageNum, Integer pageSize);
 
-    void getOrderByOrderId(Integer orderId, String jobNum, String jobName)
+    int getOrderByOrderId(Integer orderId, String jobNum, String jobName)
             throws BusinessServiceException;
 
-    Page<OrderRecord> listAllOrderByJobNum(Integer pageNum, Integer pageSize, String jobNum);
+    Page<OrderRecord> listAllOrderByJobNum(Integer pageNum, Integer pageSize, String jobNum,
+            String status);
 
     int finishOrder(Integer orderId);
 }

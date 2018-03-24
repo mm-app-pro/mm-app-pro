@@ -32,7 +32,7 @@ public class ApplyOrderController {
 
     @RequestMapping("loginUser")
     @ResponseBody
-    public SysUser pageApplyOrder(HttpServletRequest req) {
+    public SysUser loginUser(HttpServletRequest req) {// 用户登陆后获取用户信息
         logger.info("Invoke loginUser start!");
         SysUser su = (SysUser) req.getSession().getAttribute("user");
         logger.info("Invoke loginUser end!");
@@ -41,7 +41,7 @@ public class ApplyOrderController {
 
     @RequestMapping("submit")
     @ResponseBody
-    public RespBody submitOrder(HttpServletRequest req, OrderRecord record) {
+    public RespBody submitOrder(HttpServletRequest req, OrderRecord record) {// 工单提交
         logger.info("Invoke submit start!");
         RespBody rb = new RespBody();
         logger.info("data:{}", record);
@@ -65,7 +65,7 @@ public class ApplyOrderController {
 
     @RequestMapping("list")
     @ResponseBody
-    public RespList<OrderRecord> listRecordByIndetityNum(HttpServletRequest req, PageBean page) {
+    public RespList<OrderRecord> listRecordByIndetityNum(HttpServletRequest req, PageBean page) {// 查看当前用户以往工单
         SysUser su = (SysUser) req.getSession().getAttribute("user");
         String identityNum = su.getNum();
         logger.info("Invoke list start! data:{}", identityNum);

@@ -33,19 +33,23 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     @Override
-    public void getOrderByOrderId(Integer orderId, String jobNum, String jobName)
+    public int getOrderByOrderId(Integer orderId, String jobNum, String jobName)
             throws BusinessServiceException {
         logger.info("Invoke getOrderByOrderId start!");
-        orderRecordMapper.getOrderByOrderId(orderId, jobNum, jobName);
+        int result = orderRecordMapper.getOrderByOrderId(orderId, jobNum, jobName);
+        if (result == 0) {
+            throw new BusinessServiceException("领取失败");
+        }
         logger.info("Invoke getOrderByOrderId end!");
+        return result;
     }
 
     @Override
     public Page<OrderRecord> listAllOrderByJobNum(Integer pageNum, Integer pageSize,
-            String jobNum) {
+            String jobNum, String status) {
         logger.info("Invoke listAllOrderByJobNum start!");
         Page<OrderRecord> list = PageHelper.startPage(pageNum, pageSize).doSelectPage(() -> {
-            orderRecordMapper.listAllOrderByJobNum(jobNum);
+            orderRecordMapper.listAllOrderByJobNum(jobNum, status);
         });
         logger.info("Invoke listAllOrderByJobNum end!");
         return list;

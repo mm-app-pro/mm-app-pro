@@ -63,7 +63,7 @@ $(function() {
 
 
     //上门维修后反馈
-    $('.content').delegate('.feedbackWait', 'click', function() {
+    $('body').delegate('.feedbackWait', 'click', function() {
         var obj = $(this).parents('.li-data');
         var address = obj.find('.li-address').text();
         var contact = obj.find('.li-name').text() + '-' + obj.find('.li-phone').text();

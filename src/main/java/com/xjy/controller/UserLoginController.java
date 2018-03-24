@@ -1,20 +1,13 @@
 package com.xjy.controller;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.xjy.entity.SysRole;
 import com.xjy.entity.SysUser;
 import com.xjy.service.SysRoleService;
 import com.xjy.service.UserLoginService;
@@ -41,7 +34,7 @@ public class UserLoginController {
 
     @RequestMapping("user")
     @ResponseBody
-    public RespBody userLogin(HttpServletRequest req, SysUser user) {
+    public RespBody userLogin(HttpServletRequest req, SysUser user) {// 用户登陆
         logger.info("Invoke userLogin start!");
         RespBody resp = new RespBody();
         logger.info("data:{}", user);

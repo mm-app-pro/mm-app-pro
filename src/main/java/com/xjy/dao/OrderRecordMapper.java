@@ -25,10 +25,11 @@ public interface OrderRecordMapper {
 
     List<OrderRecord> listIsCheckedOrder();
 
-    void getOrderByOrderId(@Param("orderId") Integer orderId, @Param("jobNum") String jobNum,
+    int getOrderByOrderId(@Param("orderId") Integer orderId, @Param("jobNum") String jobNum,
             @Param("jobName") String jobName);
-    
-    List<OrderRecord> listAllOrderByJobNum(@Param("jobNum") String jobNum);
-    
+
+    List<OrderRecord> listAllOrderByJobNum(@Param("jobNum") String jobNum,
+            @Param("status") String status);
+
     List<OrderRecord> listUncheckOrder();
 }

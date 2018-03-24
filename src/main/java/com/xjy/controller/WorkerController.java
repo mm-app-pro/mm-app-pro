@@ -12,6 +12,7 @@ import com.github.pagehelper.Page;
 import com.xjy.entity.OrderRecord;
 import com.xjy.entity.PageBean;
 import com.xjy.entity.SysUser;
+import com.xjy.enums.OrderStatusEnum;
 import com.xjy.service.WorkerService;
 import com.xjy.util.BusinessServiceException;
 import com.xjy.util.RespBody;
@@ -32,7 +33,7 @@ public class WorkerController {
 
     @RequestMapping("isCheckedOrder")
     @ResponseBody
-    public RespList<OrderRecord> isCheckedOrder(HttpServletRequest req, PageBean page) {
+    public RespList<OrderRecord> isCheckedOrder(HttpServletRequest req, PageBean page) {// 查看已经审核完的单
         logger.info("Invoke isCheckedOrder start!");
         Page<OrderRecord> list =
                 workerService.listIsCheckedOrder(page.getPageNum(), page.getPageSize());
@@ -49,7 +50,7 @@ public class WorkerController {
     }
 
     @RequestMapping("getOrder")
-    public RespBody getOrder(HttpServletRequest req, OrderRecord record) {// 抢单
+    public RespBody getOrder(HttpServletRequest req, OrderRecord record) {// 领取
         logger.info("Invoke getOrder start!");
         RespBody resp = new RespBody();
         SysUser user = (SysUser) req.getSession().getAttribute("user");
@@ -68,20 +69,51 @@ public class WorkerController {
         return resp;
     }
 
-    @RequestMapping("getAllOrder")
-    public ModelAndView getAllOrder(HttpServletRequest req, PageBean page) {// 获取自己的订单
-        logger.info("Invoke getAllOrder start!");
-        ModelAndView mv = new ModelAndView();
+    @RequestMapping("getValidOrder")
+    @ResponseBody
+    public RespList<OrderRecord> getValidOrder(HttpServletRequest req, PageBean page) {// 获取自己的订单
+        logger.info("Invoke getValidOrder start!");
         SysUser user = (SysUser) req.getSession().getAttribute("user");
         Page<OrderRecord> list = workerService.listAllOrderByJobNum(page.getPageNum(),
-                page.getPageSize(), user.getNum());
-        mv.addObject("list", list.getResult());
-        mv.addObject("pageNum", list.getPageNum());
-        mv.addObject("pageSize", list.getPageSize());
-        mv.addObject("pages", list.getPages());
-        mv.addObject("total", list.getTotal());
-        logger.info("Invoke getAllOrder end!");
-        return mv;
+                page.getPageSize(), user.getNum(), OrderStatusEnum.VALID.name());
+        RespList<OrderRecord> result = new RespList<>();
+        result.setEndRow(list.getEndRow());
+        result.setPageNum(list.getPageNum());
+        result.setPages(list.getPages());
+        result.setPageSize(list.getPageSize());
+        result.setResult(list.getResult());
+        result.setStartRow(list.getStartRow());
+        result.setTotal(list.getTotal());
+        logger.info("Invoke getValidOrder end!");
+        return result;
+    }
+
+    @RequestMapping("getDetailById")
+    @ResponseBody
+    public OrderRecord getDetailById() {
+        logger.info("Invoke getDetailById start!");
+        OrderRecord record = logger.info("Invoke getDetailById end!");
+        return record;
+    }
+
+
+    @RequestMapping("getFinishOrder")
+    @ResponseBody
+    public RespList<OrderRecord> getFinishOrder(HttpServletRequest req, PageBean page) {// 获取自己的订单
+        logger.info("Invoke getFinishOrder start!");
+        SysUser user = (SysUser) req.getSession().getAttribute("user");
+        Page<OrderRecord> list = workerService.listAllOrderByJobNum(page.getPageNum(),
+                page.getPageSize(), user.getNum(), OrderStatusEnum.FINISH.name());
+        RespList<OrderRecord> result = new RespList<>();
+        result.setEndRow(list.getEndRow());
+        result.setPageNum(list.getPageNum());
+        result.setPages(list.getPages());
+        result.setPageSize(list.getPageSize());
+        result.setResult(list.getResult());
+        result.setStartRow(list.getStartRow());
+        result.setTotal(list.getTotal());
+        logger.info("Invoke getFinishOrder end!");
+        return result;
     }
 
     @RequestMapping("finishOrder") // 已完成
