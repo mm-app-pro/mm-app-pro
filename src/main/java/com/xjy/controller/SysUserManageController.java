@@ -1,21 +1,14 @@
 package com.xjy.controller;
 
 import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-
-import org.java_websocket.WebSocket;
-import org.java_websocket.WebSocketServerFactory;
-import org.java_websocket.server.WebSocketServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.github.pagehelper.Page;
 import com.xjy.entity.OrderRecord;
 import com.xjy.entity.PageBean;
@@ -23,6 +16,7 @@ import com.xjy.entity.SysUser;
 import com.xjy.service.SysUserManageService;
 import com.xjy.util.BusinessServiceException;
 import com.xjy.util.RespBody;
+import com.xjy.util.RespList;
 
 @Controller
 @RequestMapping("user")
@@ -34,9 +28,9 @@ public class SysUserManageController {
     private SysUserManageService sysUserManageService;
 
     @RequestMapping("list")
-    public ModelAndView listSysUser(@RequestBody PageBean page) {
+    @ResponseBody
+    public RespList<SysUser> listSysUser(PageBean page) {
         logger.info("Invoke listSysUser start!");
-        ModelAndView mv = new ModelAndView("");
         Integer pageNum = page.getPageNum();
         Integer pageSize = page.getPageSize();
         if (pageNum == null) {
@@ -46,13 +40,17 @@ public class SysUserManageController {
             pageSize = 1;
         }
         Page<SysUser> list = sysUserManageService.listSysUser(pageNum, pageSize);
-        mv.addObject("list", list.getResult());
-        mv.addObject("pageNum", list.getPageNum());
-        mv.addObject("pageSize", list.getPageSize());
-        mv.addObject("pages", list.getPages());
-        mv.addObject("total", list.getTotal());
+        RespList<SysUser> result = new RespList<>();
+        result.setEndRow(list.getEndRow());
+        result.setPageNum(list.getPageNum());
+        result.setPages(list.getPages());
+        result.setPageSize(list.getPageSize());
+        result.setResult(list.getResult());
+        result.setStartRow(list.getStartRow());
+        result.setTotal(list.getTotal());
+        logger.info("result:{}", result);
         logger.info("Invoke listSysUser end!");
-        return mv;
+        return result;
     }
 
     @RequestMapping("modifyPage")
@@ -65,7 +63,7 @@ public class SysUserManageController {
 
     @RequestMapping("add")
     @ResponseBody
-    public RespBody addSysUser(HttpServletRequest req, @RequestBody SysUser user) {
+    public RespBody addSysUser(HttpServletRequest req, SysUser user) {
         logger.info("Invoke addSysUser start!");
         RespBody resp = new RespBody();
 
@@ -93,7 +91,7 @@ public class SysUserManageController {
 
     @RequestMapping("modify")
     @ResponseBody
-    public RespBody modifySysUser(HttpServletRequest req, @RequestBody SysUser user) {
+    public RespBody modifySysUser(HttpServletRequest req, SysUser user) {
         logger.info("Invoke modifySysUser start!");
         RespBody resp = new RespBody();
         try {
@@ -113,7 +111,7 @@ public class SysUserManageController {
 
     @RequestMapping("modifyStatus")
     @ResponseBody
-    public RespBody modifyStatus(HttpServletRequest req, @RequestBody SysUser user) {
+    public RespBody modifyStatus(HttpServletRequest req, SysUser user) {
         logger.info("Invoke modifyStatus start!");
         SysUser session = (SysUser) req.getSession().getAttribute("user");
         RespBody resp = new RespBody();
@@ -141,7 +139,7 @@ public class SysUserManageController {
     }
 
     @RequestMapping("uncheckOrderPage")
-    public ModelAndView uncheckOrderPage(@RequestBody PageBean page) {
+    public ModelAndView uncheckOrderPage(PageBean page) {
         logger.info("Invoke uncheckOrderPage start!");
         ModelAndView mv = new ModelAndView("");
         Page<OrderRecord> list =
@@ -157,7 +155,7 @@ public class SysUserManageController {
 
     @RequestMapping("checkOrder")
     @ResponseBody
-    public RespBody checkOrder(@RequestBody OrderRecord record) {
+    public RespBody checkOrder(OrderRecord record) {
         logger.info("Invoke checkOrder start!");
         RespBody resp = new RespBody();
         try {
@@ -174,7 +172,7 @@ public class SysUserManageController {
 
     @RequestMapping("findWorker")
     @ResponseBody
-    public List<SysUser> findWorkerByType(@RequestBody OrderRecord record) {
+    public List<SysUser> findWorkerByType(OrderRecord record) {
         logger.info("Invoke findWorkerByType start!");
         List<SysUser> list = sysUserManageService.listWorkerByType(record.getType());
         logger.info("Invoke findWorkerByType end!");

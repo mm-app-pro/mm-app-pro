@@ -33,17 +33,18 @@ public class ApplyOrderController {
         logger.info("Invoke page start!");
         SysUser su = (SysUser) req.getSession().getAttribute("user");
         if (null == su) {
+            logger.warn("user no login!");
             return new ModelAndView("redirect:/login/page");
         }
-        ModelAndView mv = new ModelAndView("index");
-//        List<Map<String, String>> typeList = new ArrayList<>();
-//        OrderStatusEnum[] ose = OrderStatusEnum.values();
-//        for (OrderStatusEnum e : ose) {
-//            Map<String, String> map = new HashMap<>();
-//            map.put(e.name(), e.getName());
-//            typeList.add(map);
-//        }
-//        mv.addObject("type", JsonUtils.toJsonString(typeList));
+        ModelAndView mv = new ModelAndView("student/student");
+        // List<Map<String, String>> typeList = new ArrayList<>();
+        // OrderStatusEnum[] ose = OrderStatusEnum.values();
+        // for (OrderStatusEnum e : ose) {
+        // Map<String, String> map = new HashMap<>();
+        // map.put(e.name(), e.getName());
+        // typeList.add(map);
+        // }
+        // mv.addObject("type", JsonUtils.toJsonString(typeList));
         mv.addObject("identityNum", su.getNum());
         mv.addObject("name", su.getName());
         mv.addObject("mobile", su.getMobile());
@@ -54,7 +55,7 @@ public class ApplyOrderController {
 
     @RequestMapping("submit")
     @ResponseBody
-    public RespBody submitOrder(HttpServletRequest req, @RequestBody OrderRecord record) {
+    public RespBody submitOrder(HttpServletRequest req, OrderRecord record) {
         logger.info("Invoke submit start!");
         RespBody rb = new RespBody();
         logger.info("data:{}", record);
@@ -80,8 +81,7 @@ public class ApplyOrderController {
     @ResponseBody
     public List<OrderRecord> listRecordByIndetityNum(HttpServletRequest req) {
         SysUser su = (SysUser) req.getSession().getAttribute("user");
-//        String identityNum = su.getNum();
-        String identityNum = "1234";
+        String identityNum = su.getNum();
         logger.info("Invoke list start! data:{}", identityNum);
         List<OrderRecord> list = applyOrderService.listByIdentityNum(identityNum);
         logger.info("Invoke list end! list:{}", list);

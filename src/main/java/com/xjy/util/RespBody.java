@@ -13,6 +13,15 @@ public class RespBody {
 
     Integer code;
     String message;
+    Integer roleId;
+
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
+    }
 
     public Integer getCode() {
         return code;
@@ -36,7 +45,7 @@ public class RespBody {
 
     @Override
     public String toString() {
-        return "RespBody [code=" + code + ", message=" + message + "]";
+        return "RespBody [code=" + code + ", message=" + message + ", roleId=" + roleId + "]";
     }
 
 }
