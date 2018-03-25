@@ -152,5 +152,24 @@ $(function(){
         })
 	});
 	
-	
+    //启用停用
+    $('#content').delegate('.use', 'click', function() {
+        setUserState($(this),$(this).val())
+    });
+	function setUserState(obj,value){
+        var targetState;
+        if(value=='启用'){
+            targetState = 'ON';
+        }else if(value=='禁用'){
+            targetState = 'OFF';
+        }
+        var id = obj.parents('.list-id').attr('id');
+        var state = obj.parents('.list-id').find('.list-state').text();
+        if(state==targetState){
+            layer.msg('已经'+value+'的员工不能重复'+value+'!');
+            return
+        }else{
+            console.log('发送请求')
+        }
+    }
 })
