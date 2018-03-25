@@ -1,7 +1,5 @@
 $(function() {
     var index;
-    //显示工单详细内容
-    // $.manageTab("#serviceTab .tabBar span", "#serviceTab .tabCon", "current", "click", "0");
 
     //获取工单列表数据
     var data = {};
@@ -18,6 +16,8 @@ $(function() {
     // 根据不同选项显示列表
     $('.tabBar span').click(function(){
         var tag = $(this).attr('tag');
+        $(this).siblings().removeClass('current');
+        $(this).addClass('current');
         if(tag==0){
             url = '/worker/isCheckedOrder';
             pagements(url,pageNum,pageSize,pageDivId,arrays,templateId);
@@ -87,7 +87,6 @@ $(function() {
                res = JSON.parse(res);
                if(res.code==0){
                  layer.msg('反馈完毕！',{time:1500});
-            
                  setTimeout(function(){location.reload()},1500)
                }else{
             	   	layer.msg('反馈失败，请稍后再试！');

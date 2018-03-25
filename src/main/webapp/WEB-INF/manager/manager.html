@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head> 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+
+    <!-- 公共样式 -->
+    <link href="../lib/h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css" />
+    <link href="../lib/h-ui/css/H-ui.reset.css" rel="stylesheet" type="text/css" />
+    <link href="../lib/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css" />
+
+    <!-- 业务样式 -->
+    <link href="../css/pc.css" rel="stylesheet">
+    <link href="../css/media-phone.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+    	.check-box, .radio-box{
+    		padding-left: 0px;
+    	}
+    	#addUser{
+    		/*display: none;*/
+    	}
+    </style>
+</head>
+
+<body>
+    <header class="navbar-wrapper">
+        <div class="navbar navbar-black">
+            <div class="container cl">
+                <a class="logo navbar-logo f-l mr-10" href="javascript:;">欢迎您</a>
+                <span class="logo navbar-slogan f-r mr-10" id="userMsg"></span>
+            </div>
+        </div>
+    </header>
+    <div class="container serviceCon mt-50">
+        <div id="serviceTab">
+            <div class="tabBar clearfix">
+                <span class="current" tag="0">工单管理</span>
+                <span tag="1">员工管理</span>
+            </div>
+           
+            <div class="panel panel-default">
+            	<div class="ml-10 mt-10 text-l" id="addUser" hidden>	
+            		<button class="btn btn-primary-outline radius size-S"><i class="Hui-iconfont">&#xe604;</i>添加</button>
+				</div>
+                <div class="panel-body"  id="content">
+                	<!-- <table class="table table-border table-border table-hover hidden-xs">
+				        <thead class="text-c hidden-xs">
+				            <tr>
+				                <th>员工编号</th>
+				                <th>员工名称</th>
+				                <th>手机</th>
+				                <th>工种类别</th>
+				                <th>状态</th>
+				                <th>操作</th>
+				            </tr>
+				        </thead>
+				        <tbody class="text-c content">                           
+				            {{each result}}
+				            <tr id="{{$value.num}}" class="list-id">
+				                <td>{{$value.num}}</td>
+				                <td>{{$value.name}}</td>
+				                <td>{{$value.mobile}}</td>
+				                <td>学生</td>
+				                <td class="list-state">{{$value.status}}</td>
+				                <td class="list-manage">
+				                	<input class="btn radius btn-primary-outline radius size-S edit" type="button" value="编辑">
+				                	<input class="btn radius btn-success-outline radius size-S use" type="button" value="启用">
+				                	<input class="btn radius btn-danger-outline radius size-S disuse" type="button" value="禁用">
+				                </td>
+				            </tr>
+				            {{/each}}
+				        </tbody>
+				    </table> -->
+                </div>
+            </div>
+            <div id="page"></div>
+        </div>
+    </div>
+</body>
+</html>
+
+<!-- 审核工单弹窗 -->
+<div id="verifyModel" class="pl-20 pr-20" hidden>
+    <div class="cl mt-10">
+        <strong class="col-xs-4 text-c">审核：</strong>
+        <div class="radio-box">
+			<input type="radio" id="fail" name="orderType" value="0">
+			<label for="fail">无效</label>
+		</div>
+		<div class="radio-box">
+			<input type="radio" id="effect" name="orderType" value="1">
+			<label for="effect">有效</label>
+		</div>
+    </div>
+    <div class="cl mt-10">
+        <strong class="col-xs-4 text-c mt-10">负责人：</strong>
+    	<div class="formControls col-xs-8">
+	        <span class="select-box  size-L radius">
+	            <select class="select" size="1" name="time" id="serviceSelect">
+	                <option value="" selected>请选择..</option>
+	                <option value="1">1</option>
+	                <option value="2">2</option>
+	                <option value="3">3</option>
+	                <option value="4">4</option>
+	            </select>
+	        </span>
+	    </div>
+    </div>
+    <div class="cl feedback mt-10">
+        <strong class="col-xs-4 text-c">备注：</strong>
+        <p class="col-xs-8 pt-5 ">
+            <textarea class="textarea"  name="feedback" placeholder="请输入审核备注.." id="setfeedbak"></textarea>
+        </p>
+    </div>
+</div>
+
+<!-- 添加编辑员工弹窗 -->
+<div id="userModel" hidden>
+	<form class="form form-horizontal" id="userForm">
+        <div class="mt-10 cl pr-20">
+            <label class="form-label col-xs-3 col-sm-3 text-r">员工姓名：</label>
+            <div class="formControls col-xs-9 col-sm-9">
+                <input id="name" name="name" type="text" placeholder="请输入.." class="input-text size-L radius">
+            </div>
+        </div>
+        <div class="mt-10 cl pr-20">
+            <label class="form-label col-xs-3 col-sm-3 text-r">手机号：</label>
+            <div class="formControls col-xs-9 col-sm-9">
+                <input id="mobile" name="mobile" type="text" placeholder="请输入.." class="input-text size-L radius">
+            </div>
+        </div>
+        <div class="mt-10 cl pr-20">
+            <label class="form-label col-xs-3 col-sm-3 text-r">工种类别：</label>
+            <div class="formControls col-xs-9 col-sm-9">
+                <span class="select-box size-L radius">
+                    <select class="select" size="1" name="type">
+                        <option value="" selected>请选择..</option>
+                        <option value="water">水工</option>
+                        <option value="electricity">电工</option>
+                        <option value="apartment">公寓管理</option>
+                    </select>
+                </span>
+            </div>
+        </div>
+        <div class="mt-10 cl">
+			<div class="formControls mt-20 text-c">
+				<input name="" id="commit" type="submit" class="btn btn-primary radius size-L mr-50" value="&nbsp;添&nbsp;&nbsp;&nbsp;&nbsp;加&nbsp;">
+			</div>
+		</div>
+    </form>
+</div>
+
+
+<!-- 员工模板 -->
+<script type="text/html" id="userTp">
+	<table class="table table-border table-border table-hover hidden-xs">
+        <thead class="text-c hidden-xs">
+            <tr>
+                <th>员工编号</th>
+                <th>员工名称</th>
+                <th>手机</th>
+                <th>工种类别</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody class="text-c content">                           
+            {{each result}}
+            <tr id="{{$value.num}}" class="list-id">
+                <td>{{$value.num}}</td>
+                <td>{{$value.name}}</td>
+                <td>{{$value.mobile}}</td>
+                {{if $value.type=='water'}}
+	            <td>水工</td>
+	            {{else if $value.type=='electricity'}}
+	            <td>电工</td>
+	            {{else}}
+	            <td>公寓管理</td>
+	            {{/if}}    
+                <td class="list-state">{{$value.status}}</td>
+                <td class="list-manage">
+                	<input class="btn radius btn-primary-outline radius size-S edit" type="button" value="编辑">
+                	<input class="btn radius btn-success-outline radius size-S use" type="button" value="启用">
+                	<input class="btn radius btn-danger-outline radius size-S disuse" type="button" value="禁用">
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</script>
+
+<!-- 工单模板 -->
+<script type="text/html" id="serviceMsg">    
+   <table class="table table-border table-border table-hover hidden-xs">
+        <thead class="text-c hidden-xs">
+            <tr>
+                <th>工单编号</th>
+                <th>预约时间</th>
+                <th>工单详情</th>
+                <th>联系人</th>
+                <th>联系电话</th>
+                <th>上门地址</th>
+                <th>工单类别</th>
+                <th>负责人</th>
+                <th>工单状态</th>
+            </tr>
+        </thead>
+        <tbody class="text-c content">  
+        	{{if result.length==0}}
+        	<div>没有数据，请稍后再查看！</div>   
+        	{{/if}}                           
+            {{each result}}
+            <tr id="{{$value.id}}" class="list-id">
+                <td>{{$value.orderId}}</td>
+                <td>{{$value.reserveDateStart}}-{{$value.reserveDateEnd}}</td>
+                <td  class="td-detail"><span>{{$value.detail}}</span></td>
+                <td>{{$value.name}}</td>
+                <td>{{$value.mobile}}</td>
+                <td>{{$value.area}} {{$value.address}}</td>
+                <td>{{$value.jobName}}</td>
+                {{if $value.type=='WAITECHECK'}}
+	                <td>待审核</td>
+	                <td class="c-warning td-state">
+	                    <input class="btn btn-warning-outline radius size-S verify" type="button" value="审核">
+	                </td>
+	            {{else if $value.type=='ISCHECK'}}
+					<td>已审核</td>
+					<td class="c-warning td-state">
+	                    <input class="btn btn-default-outline radius size-S" disabled="" type="button" value="审核">
+	                </td>
+	            {{else if $value.type=='FEEDBACK'}}
+					<td>执行中</td>
+					<td class="c-warning td-state">
+	                    <input class="btn btn-default radius size-S" disabled="" type="button" value="查看">
+	                </td>
+                {{else if $value.type=='FINISH'}}
+					<td>完成</td>
+					<td class="c-warning td-state">
+	                    <input class="btn btn-default radius size-S" disabled="" type="button" value="查看">
+	                </td>
+                {{/if}}
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</script>
+
+<!-- 业务脚本 -->
+<script src="../lib/jquery.min.js"></script>
+<script src="../lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script src="../lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script src="../lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script src="../lib/layer/2.4/layer.js"></script>
+<script src="../lib/laypage/1.2/laypage.js"></script>
+<script src="../lib/template-web.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/manager.js"></script>
