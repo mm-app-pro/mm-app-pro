@@ -10,7 +10,7 @@ $(function(){
     
     //初始化列表页和分页
     var arrays = {'pageNum':pageNum,'pageSize':pageSize};
-     // pagements(url,pageNum,pageSize,pageDivId,arrays,templateId);
+      pagements(url,pageNum,pageSize,pageDivId,arrays,templateId);
 
 
 	// 菜单栏切换
@@ -22,17 +22,24 @@ $(function(){
 			$('#addUser').hide();
             $('#orderFilter').show();
 			console.log('进入工单管理');
+			var arrays = {'pageNum':pageNum,'pageSize':pageSize};
+		      pagements(url,pageNum,pageSize,pageDivId,arrays,templateId);
 		}else{
 			$('#addUser').show();
             $('#orderFilter').hide();
 			console.log('进入员工管理');
+			url = '/user/list';
+			templateId = 'userTp';
+			var arrays = {'pageNum':pageNum,'pageSize':pageSize};
+		      pagements(url,pageNum,pageSize,pageDivId,arrays,templateId);
 		}
 	})
 
     // 工单类别筛选
-    $('#content').delegate('input[name="orderType"]', 'click', function() {
-        var value = $(this).val();
-        console.log(value); 
+    $('input[name="orderType"]').click(function() {
+        var status = $(this).val();
+        var arrays = {'pageNum':pageNum,'pageSize':pageSize,'status':status};
+        pagements(url,pageNum,pageSize,pageDivId,arrays,templateId);
     });
 
 	// 工单审核处理
@@ -96,7 +103,7 @@ $(function(){
             var data = $('#userForm').serialize();
             console.log('员工信息----',data)
             $.ajax({
-                url: '',
+                url: '/user/add',
                 type: "post",
                 data: data,
                 error: function() {
@@ -105,10 +112,11 @@ $(function(){
                 success: function(res) {
                     res = JSON.parse(res);
                     if (res.code == 0) {
-                        layer.msg('添加成功！');
-                        location.reload();
+                        layer.msg('操作成功！');
+                        layer.close(uIndex);
+                        $('.tabBar span').eq(1).click();
                     } else {
-                        layer.msg('添加失败！' + res.message);
+                        layer.msg('操作失败！' + res.message);
                     }
                 }
             })
@@ -129,7 +137,12 @@ $(function(){
 	// 编辑员工
 	$('#content').delegate('.edit', 'click', function() {
 		var id = $(this).parents('.list-id').attr('id');
-		console.log(id);
+		var res = sendRequest('/user/selectUserRecord',{"id":id});
+		res = JSON.parse(res);
+		$('#name').val(res.name);
+		$('#mobile').val(res.mobile);
+		$('#typeSelect').find('option[value='+res.type+']').attr('selected','selected');
+		$('#userId').val(res.id);
 		uIndex = layer.open({
 			title:'编辑员工',
 			type: 1,
@@ -138,4 +151,6 @@ $(function(){
             area:['500px','300px']
         })
 	});
+	
+	
 })

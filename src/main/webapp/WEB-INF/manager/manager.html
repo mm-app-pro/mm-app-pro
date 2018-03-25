@@ -54,15 +54,15 @@
                 <div class="cl mt-10 ml-10" id="orderFilter">
                     <strong>筛选：</strong>
                     <div class="radio-box">
-                        <input type="radio" id="all" name="orderType" value="0">
+                        <input type="radio" id="all" name="orderType" value="" checked>
                         <label for="all">全部</label>
                     </div>
                     <div class="radio-box">
-                        <input type="radio" id="verifyed" name="orderType" value="1">
+                        <input type="radio" id="verifyed" name="orderType" value="ISCHECK">
                         <label for="verifyed">已审核</label>
                     </div>
                     <div class="radio-box">
-                        <input type="radio" id="inVerify" name="orderType" value="2">
+                        <input type="radio" id="inVerify" name="orderType" value="WAITECHECK">
                         <label for="inVerify">待审核</label>
                     </div>
                 </div>  
@@ -145,6 +145,7 @@
             <label class="form-label col-xs-3 col-sm-3 text-r">员工姓名：</label>
             <div class="formControls col-xs-9 col-sm-9">
                 <input id="name" name="name" type="text" placeholder="请输入.." class="input-text size-L radius">
+                <input type="hidden" id="userId" name="id">
             </div>
         </div>
         <div class="mt-10 cl pr-20">
@@ -157,7 +158,7 @@
             <label class="form-label col-xs-3 col-sm-3 text-r">工种类别：</label>
             <div class="formControls col-xs-9 col-sm-9">
                 <span class="select-box size-L radius">
-                    <select class="select" size="1" name="type">
+                    <select class="select" size="1" name="type" id="typeSelect">
                         <option value="" selected>请选择..</option>
                         <option value="water">水工</option>
                         <option value="electricity">电工</option>
@@ -190,7 +191,7 @@
         </thead>
         <tbody class="text-c content">                           
             {{each result}}
-            <tr id="{{$value.num}}" class="list-id">
+            <tr id="{{$value.id}}" class="list-id">
                 <td>{{$value.num}}</td>
                 <td>{{$value.name}}</td>
                 <td>{{$value.mobile}}</td>
@@ -215,21 +216,6 @@
 
 <!-- 工单模板 -->
 <script type="text/html" id="serviceMsg">  
-    <div class="cl mt-10">
-        <strong>筛选：</strong>
-        <div class="radio-box">
-            <input type="radio" id="all" name="orderType" value="0">
-            <label for="all">全部</label>
-        </div>
-        <div class="radio-box">
-            <input type="radio" id="verifyed" name="orderType" value="1">
-            <label for="verifyed">已审核</label>
-        </div>
-        <div class="radio-box">
-            <input type="radio" id="inVerify" name="orderType" value="2">
-            <label for="inVerify">待审核</label>
-        </div>
-    </div>  
    <table class="table table-border table-border table-hover hidden-xs">
         <thead class="text-c hidden-xs">
             <tr>
@@ -273,9 +259,13 @@
 	            {{else if $value.status=='ISCHECK'}}
 					<td>已审核</td>
 					<td class="c-warning td-state">
-	                    <input class="btn btn-default-outline radius size-S" disabled="" type="button" value="查看">
+	                    \
 	                </td>
-	            {{else if $value.status=='FEEDBACK'}}
+	            {{else if $value.status=='INVALID'}}
+					<td>无效</td>
+					<td class="c-warning td-state">\
+	                </td>
+				{{else if $value.status=='FEEDBACK'}}
 					<td>执行中</td>
 					<td class="c-warning td-state">
 	                    <input class="btn btn-default radius size-S" disabled="" type="button" value="查看">
@@ -300,5 +290,5 @@
 <script src="../lib/layer/2.4/layer.js"></script>
 <script src="../lib/laypage/1.2/laypage.js"></script>
 <script src="../lib/template-web.js"></script>
-<!-- <script src="../js/common.js"></script> -->
+<script src="../js/common.js"></script>
 <script src="../js/manager.js"></script>

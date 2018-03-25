@@ -1,5 +1,6 @@
 package com.xjy.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -16,6 +17,7 @@ import com.xjy.entity.OrderRecord;
 import com.xjy.entity.SysUser;
 import com.xjy.service.SysUserManageService;
 import com.xjy.util.BusinessServiceException;
+import com.xjy.util.Md5Utils;
 
 @Service("sysUserManageService")
 public class SysUserManageServiceImpl implements SysUserManageService {
@@ -39,9 +41,13 @@ public class SysUserManageServiceImpl implements SysUserManageService {
         } else {
             maxNum = String.valueOf(Integer.parseInt(maxNum) + 1);
         }
-
+        Date date = new Date();
         user.setNum(maxNum);
-        user.setPassword("12345");// 默认密码
+        user.setRoleId(2);
+        user.setStatus("ON");
+        user.setCreateTime(date);
+        user.setModifyTime(date);
+        user.setPassword(Md5Utils.encrypt("12345"));// 默认密码
 
         sysUserMapper.insertSelective(user);
         logger.info("Invoke addSysUser end!");
@@ -82,10 +88,10 @@ public class SysUserManageServiceImpl implements SysUserManageService {
     }
 
     @Override
-    public Page<OrderRecord> listUncheckOrder(Integer pageNum, Integer pageSize) {
+    public Page<OrderRecord> listUncheckOrder(Integer pageNum, Integer pageSize, String status) {
         logger.info("Invoke listUncheckOrder start!");
         Page<OrderRecord> list = PageHelper.startPage(pageNum, pageSize).doSelectPage(() -> {
-            orderRecordMapper.listUncheckOrder();
+            orderRecordMapper.listUncheckOrder(status);
         });
         logger.info("Invoke listUncheckOrder end!result:{}", list.getResult().get(0));
         return list;
@@ -110,6 +116,14 @@ public class SysUserManageServiceImpl implements SysUserManageService {
         OrderRecord record = orderRecordMapper.selectByPrimaryKey(id);
         logger.info("Invoke findRecordById end!");
         return record;
+    }
+
+    @Override
+    public SysUser selectUserById(Integer id) {
+        logger.info("Invoke selectUserById start!");
+        SysUser user = sysUserMapper.selectByPrimaryKey(id);
+        logger.info("Invoke selectUserById end!");
+        return user;
     }
 
 }

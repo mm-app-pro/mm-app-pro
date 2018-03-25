@@ -31,5 +31,5 @@ public interface OrderRecordMapper {
     List<OrderRecord> listAllOrderByJobNum(@Param("jobNum") String jobNum,
             @Param("status") String status);
 
-    List<OrderRecord> listUncheckOrder();
+    List<OrderRecord> listUncheckOrder(@Param("status") String status);
 }

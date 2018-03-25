@@ -288,7 +288,8 @@
 		from order_record
 		where job_num = #{jobNum}
 		and status = #{status}
-		order by
+		order
+		by
 		reserve_date_start
 		desc
 	</select>
@@ -296,6 +297,11 @@
 		select
 		<include refid="Base_Column_List" />
 		from order_record
-		where status = "WAITECHECK" order by id
+		<where>
+			<if test="status != null">
+				status = #{status}
+			</if>
+		</where>
+		order by id
 	</select>
 </mapper>

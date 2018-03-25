@@ -3,6 +3,7 @@ package com.xjy.controller;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -61,10 +62,13 @@ public class SysUserManageController {
 
     @RequestMapping("uncheckOrder")
     @ResponseBody
-    public RespList<OrderRecord> uncheckOrder(PageBean page) {
+    public RespList<OrderRecord> uncheckOrder(PageBean page, String status) {// 按照状态查找
         logger.info("Invoke uncheckOrder start!");
-        Page<OrderRecord> list =
-                sysUserManageService.listUncheckOrder(page.getPageNum(), page.getPageSize());
+        if (StringUtils.isBlank(status)) {
+            status = null;
+        }
+        Page<OrderRecord> list = sysUserManageService.listUncheckOrder(page.getPageNum(),
+                page.getPageSize(), status);
         RespList<OrderRecord> result = new RespList<>();
         result.setEndRow(list.getEndRow());
         result.setPageNum(list.getPageNum());
@@ -99,7 +103,12 @@ public class SysUserManageController {
         }
 
         try {
-            sysUserManageService.addSysUser(user);
+            SysUser record = sysUserManageService.selectUserById(user.getId());
+            if (null == record) {
+                sysUserManageService.addSysUser(user);
+            } else {
+                sysUserManageService.modifyUser(user);
+            }
             resp.setCode(0);
             resp.setMessage("success!");
         } catch (BusinessServiceException e) {
@@ -119,7 +128,7 @@ public class SysUserManageController {
         logger.info("Invoke modifySysUser start!");
         RespBody resp = new RespBody();
         try {
-            sysUserManageService.addSysUser(user);
+            sysUserManageService.modifyUser(user);
             resp.setCode(0);
             resp.setMessage("success!");
         } catch (BusinessServiceException e) {
@@ -180,13 +189,22 @@ public class SysUserManageController {
         return resp;
     }
 
+    @RequestMapping("selectUserRecord")
+    @ResponseBody
+    public SysUser selectSysUserRecord(Integer id) {
+        logger.info("Invoke selectSysUserRecord start!id:{}", id);
+        SysUser user = sysUserManageService.selectUserById(id);
+        logger.info("Invoke selectSysUserRecord end!user:{}", user);
+        return user;
+    }
+
     @RequestMapping("findWorker")
     @ResponseBody
     public List<SysUser> findWorkerByType(OrderRecord record) {
         logger.info("Invoke findWorkerByType start!");
         record = sysUserManageService.findRecordById(record.getId());
         List<SysUser> list = sysUserManageService.listWorkerByType(record.getType());
-        logger.info("Invoke findWorkerByType end!");
+        logger.info("Invoke findWorkerByType end!user:{}", record);
         return list;
     }
 

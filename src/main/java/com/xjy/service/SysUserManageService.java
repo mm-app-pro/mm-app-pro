@@ -16,12 +16,13 @@ public interface SysUserManageService {
 
     void modifyStatus(Integer id, String status) throws BusinessServiceException;
 
-    Page<OrderRecord> listUncheckOrder(Integer pageNum, Integer pageSize);
+    Page<OrderRecord> listUncheckOrder(Integer pageNum, Integer pageSize, String status);
 
     List<SysUser> listWorkerByType(String type);
 
     int checkOrder(OrderRecord record);
-    
+
     OrderRecord findRecordById(Integer id);
 
+    SysUser selectUserById(Integer id);
 }

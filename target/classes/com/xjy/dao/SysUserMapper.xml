@@ -158,7 +158,8 @@
 		select
 		<include refid="Base_Column_List" />
 		from sys_user
-		where role_id = 1
+		where role_id = 2
+		order by id desc
 	</select>
 
 	<select id="selectMaxNum" resultType="java.lang.String">
