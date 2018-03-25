@@ -87,7 +87,7 @@ public class SysUserManageServiceImpl implements SysUserManageService {
         Page<OrderRecord> list = PageHelper.startPage(pageNum, pageSize).doSelectPage(() -> {
             orderRecordMapper.listUncheckOrder();
         });
-        logger.info("Invoke listUncheckOrder end!");
+        logger.info("Invoke listUncheckOrder end!result:{}", list.getResult().get(0));
         return list;
     }
 
@@ -101,7 +101,15 @@ public class SysUserManageServiceImpl implements SysUserManageService {
 
     @Override
     public int checkOrder(OrderRecord record) {
-        return orderRecordMapper.updateByPrimaryKey(record);
+        return orderRecordMapper.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public OrderRecord findRecordById(Integer id) {
+        logger.info("Invoke findRecordById start!");
+        OrderRecord record = orderRecordMapper.selectByPrimaryKey(id);
+        logger.info("Invoke findRecordById end!");
+        return record;
     }
 
 }

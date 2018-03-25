@@ -93,15 +93,15 @@
     <div class="cl mt-10">
         <strong class="col-xs-4 text-c">审核：</strong>
         <div class="radio-box">
-			<input type="radio" id="fail" name="orderType" value="0">
+			<input type="radio" id="fail" name="orderType" value="INVALID">
 			<label for="fail">无效</label>
 		</div>
 		<div class="radio-box">
-			<input type="radio" id="effect" name="orderType" value="1">
+			<input type="radio" id="effect" name="orderType" value="ISCHECK">
 			<label for="effect">有效</label>
 		</div>
     </div>
-    <div class="cl mt-10">
+<!--      <div class="cl mt-10">
         <strong class="col-xs-4 text-c mt-10">负责人：</strong>
     	<div class="formControls col-xs-8">
 	        <span class="select-box  size-L radius">
@@ -114,11 +114,11 @@
 	            </select>
 	        </span>
 	    </div>
-    </div>
+    </div>-->
     <div class="cl feedback mt-10">
         <strong class="col-xs-4 text-c">备注：</strong>
         <p class="col-xs-8 pt-5 ">
-            <textarea class="textarea"  name="feedback" placeholder="请输入审核备注.." id="setfeedbak"></textarea>
+            <textarea class="textarea"  name="feedback" placeholder="请输入审核备注.." id="setverify"></textarea>
         </p>
     </div>
 </div>
@@ -209,9 +209,10 @@
                 <th>联系人</th>
                 <th>联系电话</th>
                 <th>上门地址</th>
-                <th>工单类别</th>
                 <th>负责人</th>
+                <th>工单类别</th>
                 <th>工单状态</th>
+				<th>操作</th>
             </tr>
         </thead>
         <tbody class="text-c content">  
@@ -227,22 +228,29 @@
                 <td>{{$value.mobile}}</td>
                 <td>{{$value.area}} {{$value.address}}</td>
                 <td>{{$value.jobName}}</td>
-                {{if $value.type=='WAITECHECK'}}
+                {{if $value.type=='water'}}
+            			<td class="td-klass">水工</td>
+            		{{else if $value.type=='electricity'}}
+            			<td class="td-klass">电工</td>
+            		{{else}}
+            			<td class="td-klass">公寓管理</td>
+            		{{/if}} 
+                {{if $value.status=='WAITECHECK'}}
 	                <td>待审核</td>
 	                <td class="c-warning td-state">
 	                    <input class="btn btn-warning-outline radius size-S verify" type="button" value="审核">
 	                </td>
-	            {{else if $value.type=='ISCHECK'}}
+	            {{else if $value.status=='ISCHECK'}}
 					<td>已审核</td>
 					<td class="c-warning td-state">
-	                    <input class="btn btn-default-outline radius size-S" disabled="" type="button" value="审核">
+	                    <input class="btn btn-default-outline radius size-S" disabled="" type="button" value="查看">
 	                </td>
-	            {{else if $value.type=='FEEDBACK'}}
+	            {{else if $value.status=='FEEDBACK'}}
 					<td>执行中</td>
 					<td class="c-warning td-state">
 	                    <input class="btn btn-default radius size-S" disabled="" type="button" value="查看">
 	                </td>
-                {{else if $value.type=='FINISH'}}
+                {{else if $value.status=='FINISH'}}
 					<td>完成</td>
 					<td class="c-warning td-state">
 	                    <input class="btn btn-default radius size-S" disabled="" type="button" value="查看">

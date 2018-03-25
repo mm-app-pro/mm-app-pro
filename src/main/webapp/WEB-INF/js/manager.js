@@ -4,13 +4,13 @@ $(function(){
     var data = {};
     var pageSize = 10;
     var pageNum = 1;
-    var url = '/worker/isCheckedOrder';
+    var url = '/user/uncheckOrder';
     var pageDivId="page";
     var templateId="serviceMsg";
     
     //初始化列表页和分页
     var arrays = {'pageNum':pageNum,'pageSize':pageSize};
-    // pagements(url,pageNum,pageSize,pageDivId,arrays,templateId);
+     pagements(url,pageNum,pageSize,pageDivId,arrays,templateId);
 
 
 	// 菜单栏切换
@@ -29,6 +29,10 @@ $(function(){
 
 	// 工单审核处理
 	$('#content').delegate('.verify', 'click', function() {
+		var id = $(this).parents('.list-id').attr('id');
+//		var res = sendRequest('/user/findWorker',{'id':id});
+//		res = JSON.parse(res);
+//		console.log(res);
 		layer.open({
 			title:'工单审核',
 			type: 1,
@@ -39,7 +43,22 @@ $(function(){
             btnAlign: 'c',
             area:['350px','310px'],
             yes: function(index, layero) {
-              
+              var status = $("input[name='orderType']:checked").val();
+              var remark = $('#setverify').val();
+              if(!status){
+            	  layer.msg('请选择工单审核结果！');
+            	  return
+              }else{
+            	  var data = {'id':id,'status':status,'remark':remark};
+            	  var res = sendRequest('/user/checkOrder', data);
+            	  res = JSON.parse(res);
+            	  if (res.code == 0) {
+                      layer.msg('提交成功！');
+                      location.reload();
+                  } else {
+                      layer.msg('提交失败！' + res.message);
+                  }
+              }
             },
             btn2: function(index, layero) {
                 layer.close(index);

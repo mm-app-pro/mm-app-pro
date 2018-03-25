@@ -27,6 +27,12 @@ public class SysUserManageController {
     @Resource
     private SysUserManageService sysUserManageService;
 
+    @RequestMapping("html")
+    public ModelAndView html() {
+        ModelAndView mv = new ModelAndView("manager/manager");
+        return mv;
+    }
+
     @RequestMapping("list")
     @ResponseBody
     public RespList<SysUser> listSysUser(PageBean page) {
@@ -50,6 +56,24 @@ public class SysUserManageController {
         result.setTotal(list.getTotal());
         logger.info("result:{}", result);
         logger.info("Invoke listSysUser end!");
+        return result;
+    }
+
+    @RequestMapping("uncheckOrder")
+    @ResponseBody
+    public RespList<OrderRecord> uncheckOrder(PageBean page) {
+        logger.info("Invoke uncheckOrder start!");
+        Page<OrderRecord> list =
+                sysUserManageService.listUncheckOrder(page.getPageNum(), page.getPageSize());
+        RespList<OrderRecord> result = new RespList<>();
+        result.setEndRow(list.getEndRow());
+        result.setPageNum(list.getPageNum());
+        result.setPages(list.getPages());
+        result.setPageSize(list.getPageSize());
+        result.setResult(list.getResult());
+        result.setStartRow(list.getStartRow());
+        result.setTotal(list.getTotal());
+        logger.info("Invoke uncheckOrder end!");
         return result;
     }
 
@@ -138,21 +162,6 @@ public class SysUserManageController {
         return resp;
     }
 
-    @RequestMapping("uncheckOrderPage")
-    public ModelAndView uncheckOrderPage(PageBean page) {
-        logger.info("Invoke uncheckOrderPage start!");
-        ModelAndView mv = new ModelAndView("");
-        Page<OrderRecord> list =
-                sysUserManageService.listUncheckOrder(page.getPageNum(), page.getPageSize());
-        mv.addObject("list", list.getResult());
-        mv.addObject("pageNum", list.getPageNum());
-        mv.addObject("pageSize", list.getPageSize());
-        mv.addObject("pages", list.getPages());
-        mv.addObject("total", list.getTotal());
-        logger.info("Invoke uncheckOrderPage end!");
-        return mv;
-    }
-
     @RequestMapping("checkOrder")
     @ResponseBody
     public RespBody checkOrder(OrderRecord record) {
@@ -165,8 +174,9 @@ public class SysUserManageController {
         } catch (Exception ex) {
             resp.setCode(1);
             resp.setMessage("server error!");
+            logger.error("error! e:{}", ex.getMessage());
         }
-        logger.info("Invoke checkOrder end!");
+        logger.info("Invoke checkOrder end!resp:{}", resp);
         return resp;
     }
 
@@ -174,6 +184,7 @@ public class SysUserManageController {
     @ResponseBody
     public List<SysUser> findWorkerByType(OrderRecord record) {
         logger.info("Invoke findWorkerByType start!");
+        record = sysUserManageService.findRecordById(record.getId());
         List<SysUser> list = sysUserManageService.listWorkerByType(record.getType());
         logger.info("Invoke findWorkerByType end!");
         return list;

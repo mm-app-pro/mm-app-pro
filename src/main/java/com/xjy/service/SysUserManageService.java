@@ -21,5 +21,7 @@ public interface SysUserManageService {
     List<SysUser> listWorkerByType(String type);
 
     int checkOrder(OrderRecord record);
+    
+    OrderRecord findRecordById(Integer id);
 
 }
