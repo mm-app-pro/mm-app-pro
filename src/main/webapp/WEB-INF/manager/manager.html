@@ -51,7 +51,22 @@
             	<div class="ml-10 mt-10 text-l" id="addUser" hidden>	
             		<button class="btn btn-primary-outline radius size-S"><i class="Hui-iconfont">&#xe604;</i>添加</button>
 				</div>
-                <div class="panel-body"  id="content">
+                <div class="cl mt-10 ml-10" id="orderFilter">
+                    <strong>筛选：</strong>
+                    <div class="radio-box">
+                        <input type="radio" id="all" name="orderType" value="0">
+                        <label for="all">全部</label>
+                    </div>
+                    <div class="radio-box">
+                        <input type="radio" id="verifyed" name="orderType" value="1">
+                        <label for="verifyed">已审核</label>
+                    </div>
+                    <div class="radio-box">
+                        <input type="radio" id="inVerify" name="orderType" value="2">
+                        <label for="inVerify">待审核</label>
+                    </div>
+                </div>  
+                <div class="panel-body"  id="content">                    
                 	<!-- <table class="table table-border table-border table-hover hidden-xs">
 				        <thead class="text-c hidden-xs">
 				            <tr>
@@ -199,7 +214,22 @@
 </script>
 
 <!-- 工单模板 -->
-<script type="text/html" id="serviceMsg">    
+<script type="text/html" id="serviceMsg">  
+    <div class="cl mt-10">
+        <strong>筛选：</strong>
+        <div class="radio-box">
+            <input type="radio" id="all" name="orderType" value="0">
+            <label for="all">全部</label>
+        </div>
+        <div class="radio-box">
+            <input type="radio" id="verifyed" name="orderType" value="1">
+            <label for="verifyed">已审核</label>
+        </div>
+        <div class="radio-box">
+            <input type="radio" id="inVerify" name="orderType" value="2">
+            <label for="inVerify">待审核</label>
+        </div>
+    </div>  
    <table class="table table-border table-border table-hover hidden-xs">
         <thead class="text-c hidden-xs">
             <tr>
@@ -270,5 +300,5 @@
 <script src="../lib/layer/2.4/layer.js"></script>
 <script src="../lib/laypage/1.2/laypage.js"></script>
 <script src="../lib/template-web.js"></script>
-<script src="../js/common.js"></script>
+<!-- <script src="../js/common.js"></script> -->
 <script src="../js/manager.js"></script>

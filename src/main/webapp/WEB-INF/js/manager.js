@@ -10,7 +10,7 @@ $(function(){
     
     //初始化列表页和分页
     var arrays = {'pageNum':pageNum,'pageSize':pageSize};
-     pagements(url,pageNum,pageSize,pageDivId,arrays,templateId);
+     // pagements(url,pageNum,pageSize,pageDivId,arrays,templateId);
 
 
 	// 菜单栏切换
@@ -20,12 +20,20 @@ $(function(){
 		var section = $(this).attr('tag');
 		if(section==0){
 			$('#addUser').hide();
+            $('#orderFilter').show();
 			console.log('进入工单管理');
 		}else{
 			$('#addUser').show();
+            $('#orderFilter').hide();
 			console.log('进入员工管理');
 		}
 	})
+
+    // 工单类别筛选
+    $('#content').delegate('input[name="orderType"]', 'click', function() {
+        var value = $(this).val();
+        console.log(value); 
+    });
 
 	// 工单审核处理
 	$('#content').delegate('.verify', 'click', function() {
