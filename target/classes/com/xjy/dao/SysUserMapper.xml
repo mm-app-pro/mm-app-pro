@@ -14,7 +14,8 @@
 		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		id, role_id, num, name, mobile, password, type, status, create_time,
+		id, role_id, num, name, mobile, password, type, status,
+		create_time,
 		modify_time
 	</sql>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
@@ -25,7 +26,8 @@
 		where id = #{id,jdbcType=INTEGER}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from sys_user
+		delete from
+		sys_user
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.xjy.entity.SysUser">
@@ -34,11 +36,14 @@
 			SELECT LAST_INSERT_ID()
 		</selectKey>
 		insert into sys_user (role_id, num, name,
-		mobile, password, type, status,
+		mobile, password, type,
+		status,
 		create_time, modify_time)
-		values (#{roleId,jdbcType=INTEGER}, #{num,jdbcType=VARCHAR},
+		values (#{roleId,jdbcType=INTEGER},
+		#{num,jdbcType=VARCHAR},
 		#{name,jdbcType=VARCHAR},
-		#{mobile,jdbcType=CHAR}, #{password,jdbcType=CHAR}, #{type,jdbcType=VARCHAR},
+		#{mobile,jdbcType=CHAR}, #{password,jdbcType=CHAR},
+		#{type,jdbcType=VARCHAR},
 		#{status,jdbcType=CHAR},
 		#{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP})
 	</insert>
@@ -143,14 +148,19 @@
 	<update id="updateByPrimaryKey" parameterType="com.xjy.entity.SysUser">
 		update sys_user
 		set role_id = #{roleId,jdbcType=INTEGER},
-		num = #{num,jdbcType=VARCHAR},
+		num =
+		#{num,jdbcType=VARCHAR},
 		name = #{name,jdbcType=VARCHAR},
-		mobile = #{mobile,jdbcType=CHAR},
+		mobile =
+		#{mobile,jdbcType=CHAR},
 		password = #{password,jdbcType=CHAR},
-		type = #{type,jdbcType=VARCHAR},
+		type =
+		#{type,jdbcType=VARCHAR},
 		status = #{status,jdbcType=CHAR},
-		create_time = #{createTime,jdbcType=TIMESTAMP},
-		modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+		create_time
+		= #{createTime,jdbcType=TIMESTAMP},
+		modify_time =
+		#{modifyTime,jdbcType=TIMESTAMP}
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 
@@ -176,7 +186,8 @@
 			status = 'ON' and
 			num = #{num} and
 			password = #{psw} and
-			role_id = #{roleId}
+			role_id =
+			#{roleId}
 		</where>
 	</select>
 	<select id="listWorkerByType" resultMap="BaseResultMap">
@@ -188,5 +199,5 @@
 			type = #{type}
 		</where>
 	</select>
-	
+
 </mapper>

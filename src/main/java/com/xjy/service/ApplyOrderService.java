@@ -1,7 +1,5 @@
 package com.xjy.service;
 
-import java.util.List;
-
 import com.github.pagehelper.Page;
 import com.xjy.entity.OrderRecord;
 import com.xjy.util.BusinessServiceException;
