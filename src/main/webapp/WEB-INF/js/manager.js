@@ -156,6 +156,9 @@ $(function(){
     $('#content').delegate('.use', 'click', function() {
         setUserState($(this),$(this).val())
     });
+    $('#content').delegate('.disuse', 'click', function() {
+        setUserState($(this),$(this).val())
+    });
 	function setUserState(obj,value){
         var targetState;
         if(value=='启用'){
@@ -165,10 +168,20 @@ $(function(){
         }
         var id = obj.parents('.list-id').attr('id');
         var state = obj.parents('.list-id').find('.list-state').text();
+        var status = state=='ON'?'OFF':'ON';
         if(state==targetState){
             layer.msg('已经'+value+'的员工不能重复'+value+'!');
             return
         }else{
+        		var res = sendRequest('/user/modifyStatus',{'id':id,'status':status});
+        		res = JSON.parse(res);
+                if (res.code == 0) {
+                    layer.msg('操作成功！');
+                    layer.close(uIndex);
+                    $('.tabBar span').eq(1).click();
+                } else {
+                    layer.msg('操作失败！' + res.message);
+                }
             console.log('发送请求')
         }
     }
