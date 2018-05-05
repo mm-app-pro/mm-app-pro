@@ -53,4 +53,12 @@ public class UserLoginController {
         return resp;
     }
 
+    @RequestMapping("out")
+    public ModelAndView userLoginOut(HttpServletRequest req) {
+        logger.info("userLoginOut start!");
+//        ModelAndView mv = new ModelAndView("login");
+        req.getSession().removeAttribute("user");
+        logger.info("userLoginOut end!");
+        return new ModelAndView("redirect:/login/page");
+    }
 }

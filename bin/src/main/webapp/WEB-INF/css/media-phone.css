@@ -1,0 +1,30 @@
+@media screen and (max-width:600px) {
+    .row{
+        margin-left: 0;
+    }
+    .form-horizontal .form-label{
+        text-align: right;
+    }
+    #loginForm {
+        width: 80%;
+        position: fixed;
+        background: rgba(245, 245, 245, 0.13);
+        border-radius: 6px;
+        left: 20%;
+        top: 40%;
+        margin: -20% 0 0 -10%;
+    }
+    .td-klass{
+        font-weight: 700;
+    }
+    .td-state{
+        min-width: 48px;
+    }
+    .tabCon .col-xs-3{
+        padding: 0px;
+    }
+    .content p{
+        margin-bottom: 0!important;
+    }
+
+}

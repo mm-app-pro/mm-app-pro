@@ -1,0 +1,66 @@
+/* 学生 */
+.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12{
+    padding: 0px;
+}
+.navbar-black, .tabBar span.current {
+    background: #5a98de;
+}
+
+.navbar-black {
+    border-bottom: none;
+}
+
+.tabBar {
+    border-bottom: none;
+}
+
+.tabBar span {
+    color: #888;
+}
+
+.td-klass {
+    min-width: 25px;
+}
+
+.bt-snatch input {
+    border-radius: 50px;
+}
+
+.phoneCeil .col-xs-10 {
+    padding-left: 0px;
+}
+
+.phoneCeil li {
+    border-bottom: 1px dashed #f0f0f0;
+}
+
+.phoneCeil .orderDetail {
+    max-height: 40px;
+    line-height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    font-size: 14px;
+}
+.finishOrder .bt-snatch{
+    text-align: right;
+    color: #f37b1d;
+    margin-top: 3px;
+}
+#serviceCon .li-detail span{
+    max-width: 327px;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 14px;
+}
+#feedbackModel p{
+    padding-left: 0;
+}
+.content li:first-of-type,.content li:last-of-type{
+    padding-top: 0px;
+}

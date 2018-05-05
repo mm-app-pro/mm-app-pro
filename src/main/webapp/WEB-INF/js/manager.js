@@ -22,6 +22,7 @@ $(function(){
 			$('#addUser').hide();
             $('#orderFilter').show();
 			console.log('进入工单管理');
+			url = '/user/uncheckOrder';
 			var arrays = {'pageNum':pageNum,'pageSize':pageSize};
 		      pagements(url,pageNum,pageSize,pageDivId,arrays,templateId);
 		}else{
