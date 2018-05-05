@@ -35,6 +35,13 @@
        })
        return obj
    }
+
+   // 退出登录
+   $('#logOut').click(function(){
+      sendRequest('/login/out');
+   })
+
+
    /**
     * 分页
     * Url 请求地址
