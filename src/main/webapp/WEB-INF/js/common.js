@@ -1,8 +1,13 @@
    // 显示用户信息
-   var obj = sendRequest('/apply/loginUser', null);
-   obj = JSON.parse(obj);
-   var userText = obj.num + ' &middot;' + obj.name;
-   $('#userMsg').html(userText);
+   try{
+	   var obj = sendRequest('/apply/loginUser', null);
+	   obj = JSON.parse(obj);
+	   var userText = obj.num + ' &middot;' + obj.name;
+	   $('#userMsg').html(userText);
+   }
+   catch(err){
+	   console.log(err);
+   }
    // 选项卡功能
    jQuery.manageTab = function(tabBar, tabCon, class_name, tabEvent, i) {
        var $tab_menu = $(tabBar);
@@ -38,7 +43,7 @@
 
    // 退出登录
    $('#logOut').click(function(){
-      sendRequest('/login/out');
+	   location.href = '/login/out';
    })
 
 
