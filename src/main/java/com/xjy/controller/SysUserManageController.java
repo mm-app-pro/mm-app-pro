@@ -208,4 +208,12 @@ public class SysUserManageController {
         return list;
     }
 
+    @RequestMapping("orderDetail")
+    @ResponseBody
+    public OrderRecord getOrderDetail(Integer id) {
+        logger.info("Invoke getOrderDetail start!");
+        OrderRecord order = sysUserManageService.findRecordById(id);
+        logger.info("Invoke getOrderDetail end!");
+        return order;
+    }
 }
