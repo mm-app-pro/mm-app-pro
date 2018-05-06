@@ -43,6 +43,12 @@ $(function(){
         pagements(url,pageNum,pageSize,pageDivId,arrays,templateId);
     });
 
+    // 查看工单
+    $('#content').delegate('.getDetail','click',function(){
+        var res = sendRequest('/user/orderDetail',{'id':$(this).parents('.list-id').attr('id')});
+        layer.alert(res.remark);
+    })
+
 	// 工单审核处理
 	$('#content').delegate('.verify', 'click', function() {
 		var id = $(this).parents('.list-id').attr('id');
