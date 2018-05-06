@@ -68,6 +68,7 @@
            // 数据渲染
            var html = template(templateId, res);
            document.getElementById('content').innerHTML = html;
+           console.log(html);
            //显示分页
            laypage({
                cont: pageDivId, //容器。值支持id名、原生dom对象，jquery对象。【如该容器为】：<div id="page1"></div>

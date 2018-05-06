@@ -23,6 +23,7 @@ $(function(){
             $('#orderFilter').show();
 			console.log('进入工单管理');
 			url = '/user/uncheckOrder';
+			templateId = 'serviceMsg';
 			var arrays = {'pageNum':pageNum,'pageSize':pageSize};
 		      pagements(url,pageNum,pageSize,pageDivId,arrays,templateId);
 		}else{
