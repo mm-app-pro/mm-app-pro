@@ -259,22 +259,21 @@
 	                </td>
 	            {{else if $value.status=='ISCHECK'}}
 					<td>已审核</td>
-					<td class="c-warning td-state">
-	                    \
-	                </td>
+					<td class="c-warning td-state">\</td>
 	            {{else if $value.status=='INVALID'}}
 					<td>无效</td>
-					<td class="c-warning td-state">\
-	                </td>
+					<td class="c-warning td-state">
+                        <input class="btn btn-default radius size-S getDetail" disabled="" type="button" value="查看">               
+                    </td>
 				{{else if $value.status=='FEEDBACK'}}
 					<td>执行中</td>
 					<td class="c-warning td-state">
-	                    <input class="btn btn-default radius size-S" disabled="" type="button" value="查看">
+	                    \
 	                </td>
                 {{else if $value.status=='FINISH'}}
 					<td>完成</td>
 					<td class="c-warning td-state">
-	                    <input class="btn btn-default radius size-S" disabled="" type="button" value="查看">
+	                    <input class="btn btn-default radius size-S getDetail" disabled="" type="button" value="查看">
 	                </td>
                 {{/if}}
             </tr>
