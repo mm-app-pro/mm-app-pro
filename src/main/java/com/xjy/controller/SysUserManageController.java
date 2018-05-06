@@ -145,7 +145,7 @@ public class SysUserManageController {
     @RequestMapping("modifyStatus")
     @ResponseBody
     public RespBody modifyStatus(HttpServletRequest req, SysUser user) {
-        logger.info("Invoke modifyStatus start!user:{}",user);
+        logger.info("Invoke modifyStatus start!user:{}", user);
         SysUser session = (SysUser) req.getSession().getAttribute("user");
         RespBody resp = new RespBody();
         if (!session.getType().equals("admin")) {

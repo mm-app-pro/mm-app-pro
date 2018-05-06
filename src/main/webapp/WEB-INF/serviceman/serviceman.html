@@ -29,7 +29,7 @@
             <div class="container cl">
                 <a class="logo navbar-logo f-l mr-10" href="javascript:;">欢迎您:</a>
                 <span class="logo navbar-slogan f-1 mr-10" id="userMsg"></span>
-                <span class="logo navbar-slogan f-r mr-10" id="logOut">退出</span>
+                <span class="navbar-slogan f-r mr-10" id="logOut">退出</span>
             </div>
         </div>
     </header>
@@ -108,7 +108,7 @@
                     <input class="btn btn-warning-outline radius size-S feedbackWait" type="button" value="待反馈">
                 </td>
                 {{else if $value.status=='FINISH'}}
-                <td class="col-xs-4 text-r c-warning">已完成</td>
+                <td class="c-warning">已完成</td>
                 {{/if}}
             </tr>
             {{/each}}
@@ -119,15 +119,21 @@
             {{each result}}
             <li class="cl pb-10 list-id" id="{{$value.id}}">
                 <div class="cl">
-                    <div class="col-xs-8">
+                    <div class="col-xs-12">
                         <b>{{$value.name}}</b>
                         <span class="pipe">|</span>
                         <b>{{$value.mobile}}</b>
                     </div>
-                    <div class="col-xs-4 bt-snatch text-r">
+                    <div class="col-xs-12 bt-snatch text-l">
                         <label class="c-999 f-12">{{$value.reserveDateStart}}-{{$value.reserveDateEnd}}</label>
                     </div>
                 </div>
+                <div class="cl">
+                    <div class="col-xs-12 bt-snatch text-l">
+                        <label class=" f-12">{{$value.address}}</label>
+                    </div>
+                </div>
+				
                 <div class="cl mt-10">
                     <div class="col-xs-9">
                         <p class="orderDetail">{{$value.detail}}</p>
@@ -138,11 +144,11 @@
                         <input class="btn btn-warning radius getOrder" type="button" value="领">
                     </div>
                     {{else if $value.status=='VALID'}}
-                    <div class="col-xs-4 text-r mt-5 c-warning">
+                    <div class="col-xs-3 text-r mt-5 c-warning">
                         <input class="btn btn-warning-outline radius size-S feedbackWait" type="button" value="待反馈">
                     </div>
                     {{else if $value.status=='FINISH'}}
-                    <div class="c-warning td-state">已完成</div>
+                    <div class="col-xs-3 text-r mt-5 c-warning td-state">已完成</div>
                     {{/if}}
                 </div>
             </li>

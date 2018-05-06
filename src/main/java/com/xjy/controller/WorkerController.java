@@ -15,6 +15,7 @@ import com.xjy.entity.SysUser;
 import com.xjy.enums.OrderStatusEnum;
 import com.xjy.service.WorkerService;
 import com.xjy.util.BusinessServiceException;
+import com.xjy.util.JsonUtils;
 import com.xjy.util.RespBody;
 import com.xjy.util.RespList;
 
@@ -45,7 +46,7 @@ public class WorkerController {
         result.setResult(list.getResult());
         result.setStartRow(list.getStartRow());
         result.setTotal(list.getTotal());
-        logger.info("Invoke isCheckedOrder end!");
+        logger.info("Invoke isCheckedOrder end!result:{}",JsonUtils.toJsonString(list.getResult()));
         return result;
     }
 

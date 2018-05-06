@@ -14,6 +14,7 @@ import com.xjy.entity.PageBean;
 import com.xjy.entity.SysUser;
 import com.xjy.service.ApplyOrderService;
 import com.xjy.util.BusinessServiceException;
+import com.xjy.util.JsonUtils;
 import com.xjy.util.RespBody;
 import com.xjy.util.RespList;
 
@@ -79,7 +80,7 @@ public class ApplyOrderController {
         result.setResult(list.getResult());
         result.setStartRow(list.getStartRow());
         result.setTotal(list.getTotal());
-        logger.info("Invoke list end! list:{}", result);
+        logger.info("Invoke list end! list:{}", JsonUtils.toJsonString(list.getResult()));
         return result;
     }
 }

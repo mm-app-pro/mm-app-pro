@@ -1,12 +1,16 @@
 /* 学生 */
 #logOut{
 	padding: 0 10px;
-    border: 1px solid;
+    border: 1px solid #fff;
     height: 20px;
     line-height: 20px;
     margin-top: 10px;
     border-radius: 4px;
     cursor:pointer;
+    color:#fff;
+}
+#page{
+	margin-top:30px;
 }
 .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12{
     padding: 0px;
