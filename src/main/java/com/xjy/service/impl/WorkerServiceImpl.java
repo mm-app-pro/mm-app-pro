@@ -56,10 +56,11 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     @Override
-    public int finishOrder(Integer orderId) {
+    public int finishOrder(Integer orderId, String remark) {
         OrderRecord record = new OrderRecord();
         record.setId(orderId);
         record.setStatus(OrderStatusEnum.FINISH.name());
+        record.setRemark(remark);
         record.setModifyTime(new Date());
         return orderRecordMapper.updateByPrimaryKeySelective(record);
     }

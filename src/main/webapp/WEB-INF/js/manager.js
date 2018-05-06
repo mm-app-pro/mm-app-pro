@@ -44,8 +44,10 @@ $(function(){
     });
 
     // 查看工单
-    $('#content').delegate('.getDetail','click',function(){
-        var res = sendRequest('/user/orderDetail',{'id':$(this).parents('.list-id').attr('id')});
+    $('#content').delegate('.td-state .lookup','click',function(){
+    		var res = sendRequest('/user/orderDetail',{'id':$(this).parents('.list-id').attr('id')});
+    		res = JSON.parse(res);
+    		console.log(res);
         layer.alert(res.remark);
     })
 

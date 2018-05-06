@@ -124,7 +124,7 @@ public class WorkerController {
         RespBody resp = new RespBody();
         try {
             logger.info("reocrd:{}", record);
-            workerService.finishOrder(record.getId());
+            workerService.finishOrder(record.getId(), record.getRemark());
             resp.setCode(0);
             resp.setMessage("success!");
         } catch (Exception ex) {

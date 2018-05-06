@@ -13,7 +13,7 @@ public interface WorkerService {
     Page<OrderRecord> listAllOrderByJobNum(Integer pageNum, Integer pageSize, String jobNum,
             String status);
 
-    int finishOrder(Integer orderId);
+    int finishOrder(Integer orderId, String remark);
 
     OrderRecord selectOrderRecordById(Integer id);
 }
