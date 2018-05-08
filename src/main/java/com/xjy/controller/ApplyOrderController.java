@@ -45,6 +45,15 @@ public class ApplyOrderController {
     public RespBody submitOrder(HttpServletRequest req, OrderRecord record) {// 工单提交
         logger.info("Invoke submit start!");
         RespBody rb = new RespBody();
+        SysUser su = (SysUser) req.getSession().getAttribute("user");
+        if (null == su) {
+            rb.setCode(1);
+            rb.setMessage("please login again!");
+            return rb;
+        }
+//        record.setIdentityNum(su.getNum());
+        record.setName(su.getName());
+        record.setMobile(su.getMobile());
         logger.info("data:{}", record);
         try {
             applyOrderService.submit(record);
